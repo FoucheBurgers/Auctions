@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1536e82deb5a49f9a0579ec185d99e0f" Name="Diagram1" ZoomLevel="40">
+        <EntityTypeShape EntityType="Models.ltRollDescription" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.ltSpecy" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.tblCustomer" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.tblRoll" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="Models.FK__tblRoll__RollId__625A9A57" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__tblRoll__RollId__634EBE90" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__tblRoll__Species__65370702" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__tblRoll__BuyerId__6166761E" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__tblRoll__SellerI__6442E2C9" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Models.BidHistory" Width="1.5" PointX="5.25" PointY="4.375" />
+        <AssociationConnector Association="Models.FK__BidHistor__LinkI__2F9A1060" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

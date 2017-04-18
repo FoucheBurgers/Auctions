@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Auctions.Models.tblRoll>
+
+@{
+    ViewBag.Title = "Index";
+}
+<head>
+    <meta charset="UTF-8">
+    @*<meta http-equiv="refresh" content="5" />*@
+    <title>NWWT Silent Auction</title>
+    <style type="text/css">
+        body {
+            background-color: #000000;
+        }
+
+        body, td, th {
+            color: #FFFFFF;
+            font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-align: center;
+            font-size: 12pt;
+        }
+    </style>
+</head>
+@section Scripts{
+@*<script type="text/javascript">
+    $(function() {
+        setInterval(loadTable,5000);  // invoke load every second
+        loadTable(); // load on initial page loaded
+    });
+
+    function loadTable() {
+        $('#thegrid').load( '/bid/index' );
+    }
+</script>*@
+}
+<div id="thegrid">
+    <table class="table">
+
+        @foreach (var item in Model)
+        {
+
+            <tr style="text-align: left; font-size: 18pt" ;>
+                <td bgcolor="#3C3C3C"><img src=@Url.Content(item.PictureName) width="504" height="381" alt="Picture not available" /></td>
+
+                <td width="600">
+
+                    <p style="font-size: 18px; font-weight: bolder; color:  #F4080C">LOT : @Html.DisplayFor(model => item.Lot, new { htmlAttributes = new { @class = "form-control" } })</p>
+
+
+                    <p style="font-size: 16px; font-weight: bolder;">@Html.DisplayFor(model => item.ltSpecy.Description, new { htmlAttributes = new { @class = "form-control" } })</p>
+
+
+                    <p style="font-size: 16px">Age/DOB : @Html.DisplayFor(model => item.Age, new { htmlAttributes = new { @class = "form-control" } })</p>
+
+
+                    <p>Horn Length : @Html.DisplayFor(model => item.HornLength, new { htmlAttributes = new { @class = "form-control" } })</p>
+
+
+                    <p>Tip to Tip : @Html.DisplayFor(model => item.TipToTip, new { htmlAttributes = new { @class = "form-control" } })</p>
+                    <p>
+                        Male : @Html.DisplayFor(model => item.Male, new { htmlAttributes = new { @class = "form-control" } })
+                        , Female : @Html.DisplayFor(model => item.Female, new { htmlAttributes = new { @class = "form-control" } })
+                        , Young : @Html.DisplayFor(model => item.Young, new { htmlAttributes = new { @class = "form-control" } })
+                        , Total : @Html.DisplayFor(model => item.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </p>
+
+                    <p>CURRENT BID : R <span style="color: #F4080C">@Html.DisplayFor(model => item.BiddingPrice, new { htmlAttributes = new { @class = "form-control" } })</span></p>
+
+                    <p>@Html.ActionLink("Place your bid", "Bid", new { id = item.ID })</p>
+
+                </td>
+            </tr>
+
+        }
+
+    </table>
+
+</div>
+

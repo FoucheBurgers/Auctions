@@ -1,0 +1,952 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BidHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LinkID" Type="int" />
+          <Property Name="RollId" Type="int" />
+          <Property Name="Lot" Type="varchar" MaxLength="255" />
+          <Property Name="SellerId" Type="int" />
+          <Property Name="BuyerId" Type="int" />
+          <Property Name="BiddingPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BidTotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DateTimeBid" Type="datetime" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="ltRollDescription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ltSpecies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblCustomers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="varchar(max)" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Surname" Type="varchar(max)" />
+          <Property Name="CompanyName" Type="varchar(max)" />
+          <Property Name="ContactPerson" Type="varchar(max)" />
+          <Property Name="SA_ID" Type="varchar(max)" />
+          <Property Name="CompanyID" Type="varchar(max)" />
+          <Property Name="VATNr" Type="varchar(max)" />
+          <Property Name="TaxNr" Type="varchar(max)" />
+          <Property Name="PostalAddress1" Type="varchar(max)" />
+          <Property Name="PostalAddress2" Type="varchar(max)" />
+          <Property Name="PostalAddress3" Type="varchar(max)" />
+          <Property Name="PostalCity" Type="varchar(max)" />
+          <Property Name="PostalCode" Type="varchar(max)" />
+          <Property Name="ResAddress1" Type="varchar(max)" />
+          <Property Name="ResAddress2" Type="varchar(max)" />
+          <Property Name="ResAddress3" Type="varchar(max)" />
+          <Property Name="ResCity" Type="varchar(max)" />
+          <Property Name="ResPostalCode" Type="varchar(max)" />
+          <Property Name="eMail" Type="varchar(max)" />
+          <Property Name="CellPhone" Type="varchar(max)" />
+          <Property Name="Phone" Type="varchar(max)" />
+          <Property Name="Bank" Type="varchar(max)" />
+          <Property Name="BranchName" Type="varchar(max)" />
+          <Property Name="BranchCode" Type="varchar(max)" />
+          <Property Name="BankAccountNr" Type="varchar(max)" />
+          <Property Name="Commotion" Type="float" />
+          <Property Name="Agent" Type="varchar(max)" />
+          <Property Name="Language" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="LinkKey" Type="int" />
+          <Property Name="VATRegistered" Type="bit" />
+          <Property Name="CustomerNumber" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblRoll">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RollId" Type="int" />
+          <Property Name="Lot" Type="varchar" MaxLength="255" />
+          <Property Name="SpeciesCode" Type="int" />
+          <Property Name="TagNr" Type="varchar" MaxLength="255" />
+          <Property Name="Age" Type="varchar" MaxLength="255" />
+          <Property Name="DateMeasured" Type="varchar" MaxLength="255" />
+          <Property Name="HornLength" Type="varchar" MaxLength="255" />
+          <Property Name="TipToTip" Type="varchar" MaxLength="255" />
+          <Property Name="OtherInfo" Type="varchar(max)" />
+          <Property Name="DateAvailable" Type="varchar(max)" />
+          <Property Name="Male" Type="int" />
+          <Property Name="Female" Type="int" />
+          <Property Name="Young" Type="int" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity_Lot" Type="varchar" MaxLength="50" />
+          <Property Name="SellerId" Type="int" />
+          <Property Name="BuyerId" Type="int" />
+          <Property Name="BiddingPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BidDateTime" Type="datetime" />
+          <Property Name="BidTotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NewBidPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NewBidder" Type="int" />
+          <Property Name="Picture" Type="image" />
+          <Property Name="OnAuction" Type="bit" Nullable="false" />
+          <Property Name="Sold" Type="bit" Nullable="false" />
+          <Property Name="DateLoaded" Type="datetime" />
+          <Property Name="DateSold" Type="datetime" />
+          <Property Name="PicturePath" Type="varchar" MaxLength="255" />
+          <Property Name="PictureName" Type="varchar" MaxLength="255" />
+          <Property Name="Increments" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReservePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="LotQ" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DateTimeBid" Type="datetime" />
+          <Property Name="DateTimeClose" Type="datetime" />
+          <Property Name="CustomerNumber" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__BidHistor__LinkI__2F9A1060">
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="0..1" />
+          <End Role="BidHistory" Type="Self.BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoll">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="LinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__BuyerId__0B5CAFEA">
+          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__BuyerId__0C50D423">
+          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__RollId__0D44F85C">
+          <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="RollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__RollId__0E391C95">
+          <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="RollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__RollId__0F2D40CE">
+          <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="RollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__RollId__10216507">
+          <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="RollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__SellerI__11158940">
+          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__SellerI__1209AD79">
+          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__Species__12FDD1B2">
+          <End Role="ltSpecies" Type="Self.ltSpecies" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltSpecies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="SpeciesCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__Species__13F1F5EB">
+          <End Role="ltSpecies" Type="Self.ltSpecies" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltSpecies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="SpeciesCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddBidHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LinkID" Type="int" Mode="In" />
+          <Parameter Name="RollId" Type="int" Mode="In" />
+          <Parameter Name="Lot" Type="varchar" Mode="In" />
+          <Parameter Name="SellerId" Type="int" Mode="In" />
+          <Parameter Name="BuyerId" Type="int" Mode="In" />
+          <Parameter Name="BiddingPrice" Type="decimal" Mode="In" />
+          <Parameter Name="BidTotalPrice" Type="decimal" Mode="In" />
+          <Parameter Name="DateTimeBid" Type="datetime" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddCustomerNum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyName" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerNumber" Type="varchar" Mode="In" />
+          <Parameter Name="ContactPerson" Type="varchar" Mode="In" />
+          <Parameter Name="eMail" Type="varchar" Mode="In" />
+          <Parameter Name="CellPhone" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CustomersNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="CustomerNumber" Type="varchar" Mode="In" />
+          <Parameter Name="ContactPerson" Type="varchar" Mode="In" />
+          <Parameter Name="eMail" Type="varchar" Mode="In" />
+          <Parameter Name="CellPhone" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateBidder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="BuyerId" Type="int" Mode="In" />
+          <Parameter Name="BiddingPrice" Type="decimal" Mode="In" />
+          <Parameter Name="BidTotalPrice" Type="decimal" Mode="In" />
+          <Parameter Name="DateTimeBid" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UpdateBidTimeClose" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="DateTimeClose" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UpdateRoll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="RoleID" Type="varchar" Mode="In" />
+          <Parameter Name="Lot" Type="varchar" Mode="In" />
+          <Parameter Name="Item" Type="varchar" Mode="In" />
+          <Parameter Name="TagNr" Type="varchar" Mode="In" />
+          <Parameter Name="Age" Type="varchar" Mode="In" />
+          <Parameter Name="DateMeasured" Type="varchar" Mode="In" />
+          <Parameter Name="HornLength" Type="varchar" Mode="In" />
+          <Parameter Name="TipToTip" Type="varchar" Mode="In" />
+          <Parameter Name="OtherInfo" Type="varchar" Mode="In" />
+          <Parameter Name="DateAvailable" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Male" Type="int" Mode="In" />
+          <Parameter Name="Female" Type="int" Mode="In" />
+          <Parameter Name="Young" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="real" Mode="In" />
+          <Parameter Name="Quantity_Lot" Type="varchar" Mode="In" />
+          <Parameter Name="Seller" Type="varchar" Mode="In" />
+          <Parameter Name="Bidder" Type="varchar" Mode="In" />
+          <Parameter Name="BiddingPrice" Type="real" Mode="In" />
+          <Parameter Name="BidDateTime" Type="datetime" Mode="In" />
+          <Parameter Name="BidTotalPrice" Type="real" Mode="In" />
+          <Parameter Name="NewBidPrice" Type="real" Mode="In" />
+          <Parameter Name="NewBidder" Type="varchar" Mode="In" />
+          <Parameter Name="OnAuction" Type="bit" Mode="In" />
+          <Parameter Name="Sold" Type="bit" Mode="In" />
+          <Parameter Name="DateLoaded" Type="datetime" Mode="In" />
+          <Parameter Name="DateSold" Type="datetime" Mode="In" />
+          <Parameter Name="PictureName" Type="varchar" Mode="In" />
+          <Parameter Name="Increments" Type="real" Mode="In" />
+          <Parameter Name="ReservePrice" Type="real" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="BidHistory" EntityType="Self.BidHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ltRollDescription" EntityType="Self.ltRollDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ltSpecies" EntityType="Self.ltSpecies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRoll" EntityType="Self.tblRoll" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BidHistor__LinkI__2F9A1060" Association="Self.FK__BidHistor__LinkI__2F9A1060">
+            <End Role="tblRoll" EntitySet="tblRoll" />
+            <End Role="BidHistory" EntitySet="BidHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__BuyerId__0B5CAFEA" Association="Self.FK__tblRoll__BuyerId__0B5CAFEA">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__BuyerId__0C50D423" Association="Self.FK__tblRoll__BuyerId__0C50D423">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__RollId__0D44F85C" Association="Self.FK__tblRoll__RollId__0D44F85C">
+            <End Role="ltRollDescription" EntitySet="ltRollDescription" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__RollId__0E391C95" Association="Self.FK__tblRoll__RollId__0E391C95">
+            <End Role="ltRollDescription" EntitySet="ltRollDescription" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__RollId__0F2D40CE" Association="Self.FK__tblRoll__RollId__0F2D40CE">
+            <End Role="ltRollDescription" EntitySet="ltRollDescription" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__RollId__10216507" Association="Self.FK__tblRoll__RollId__10216507">
+            <End Role="ltRollDescription" EntitySet="ltRollDescription" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__SellerI__11158940" Association="Self.FK__tblRoll__SellerI__11158940">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__SellerI__1209AD79" Association="Self.FK__tblRoll__SellerI__1209AD79">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__Species__12FDD1B2" Association="Self.FK__tblRoll__Species__12FDD1B2">
+            <End Role="ltSpecies" EntitySet="ltSpecies" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__Species__13F1F5EB" Association="Self.FK__tblRoll__Species__13F1F5EB">
+            <End Role="ltSpecies" EntitySet="ltSpecies" />
+            <End Role="tblRoll" EntitySet="tblRoll" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ltRollDescription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblRolls" Relationship="Self.FK__tblRoll__RollId__625A9A57" FromRole="ltRollDescription" ToRole="tblRoll" />
+          <NavigationProperty Name="tblRolls1" Relationship="Self.FK__tblRoll__RollId__634EBE90" FromRole="ltRollDescription" ToRole="tblRoll" />
+        </EntityType>
+        <EntityType Name="ltSpecy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblRolls" Relationship="Self.FK__tblRoll__Species__65370702" FromRole="ltSpecies" ToRole="tblRoll" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SA_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VATNr" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TaxNr" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostalAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostalAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostalAddress3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResAddress3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ResPostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="eMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CellPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Bank" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BranchCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BankAccountNr" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Commotion" Type="Double" />
+          <Property Name="Agent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Language" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="LinkKey" Type="Int32" />
+          <Property Name="VATRegistered" Type="Boolean" />
+          <NavigationProperty Name="tblRolls" Relationship="Self.FK__tblRoll__BuyerId__6166761E" FromRole="tblCustomers" ToRole="tblRoll" />
+          <NavigationProperty Name="tblRolls1" Relationship="Self.FK__tblRoll__SellerI__6442E2C9" FromRole="tblCustomers" ToRole="tblRoll" />
+          <Property Name="CustomerNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblRoll">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RollId" Type="Int32" />
+          <Property Name="Lot" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SpeciesCode" Type="Int32" />
+          <Property Name="TagNr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DateMeasured" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HornLength" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TipToTip" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OtherInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateAvailable" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Male" Type="Int32" />
+          <Property Name="Female" Type="Int32" />
+          <Property Name="Young" Type="Int32" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity_Lot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SellerId" Type="Int32" />
+          <Property Name="BuyerId" Type="Int32" />
+          <Property Name="BiddingPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BidDateTime" Type="DateTime" Precision="3" />
+          <Property Name="BidTotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NewBidPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NewBidder" Type="Int32" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="OnAuction" Type="Boolean" Nullable="false" />
+          <Property Name="Sold" Type="Boolean" Nullable="false" />
+          <Property Name="DateLoaded" Type="DateTime" Precision="3" />
+          <Property Name="DateSold" Type="DateTime" Precision="3" />
+          <Property Name="PicturePath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PictureName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Increments" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReservePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LotQ" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ltRollDescription" Relationship="Self.FK__tblRoll__RollId__625A9A57" FromRole="tblRoll" ToRole="ltRollDescription" />
+          <NavigationProperty Name="ltRollDescription1" Relationship="Self.FK__tblRoll__RollId__634EBE90" FromRole="tblRoll" ToRole="ltRollDescription" />
+          <NavigationProperty Name="ltSpecy" Relationship="Self.FK__tblRoll__Species__65370702" FromRole="tblRoll" ToRole="ltSpecies" />
+          <NavigationProperty Name="tblCustomer" Relationship="Self.FK__tblRoll__BuyerId__6166761E" FromRole="tblRoll" ToRole="tblCustomers" />
+          <NavigationProperty Name="tblCustomer1" Relationship="Self.FK__tblRoll__SellerI__6442E2C9" FromRole="tblRoll" ToRole="tblCustomers" />
+          <Property Name="DateTimeBid" Type="DateTime" Precision="3" />
+          <Property Name="DateTimeClose" Type="DateTime" Precision="3" />
+          <Property Name="CustomerNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BidHistories" Relationship="Models.FK__BidHistor__LinkI__2F9A1060" FromRole="tblRoll" ToRole="BidHistory" />
+        </EntityType>
+        <Association Name="FK__tblRoll__RollId__625A9A57">
+          <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="RollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__RollId__634EBE90">
+          <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="RollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__Species__65370702">
+          <End Role="ltSpecies" Type="Self.ltSpecy" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltSpecies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="SpeciesCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__BuyerId__6166761E">
+          <End Role="tblCustomers" Type="Self.tblCustomer" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__SellerI__6442E2C9">
+          <End Role="tblCustomers" Type="Self.tblCustomer" Multiplicity="0..1" />
+          <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblRoll">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AuctionDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ltRollDescriptions" EntityType="Self.ltRollDescription" />
+          <EntitySet Name="ltSpecies" EntityType="Self.ltSpecy" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
+          <EntitySet Name="tblRolls" EntityType="Self.tblRoll" />
+          <AssociationSet Name="FK__tblRoll__RollId__625A9A57" Association="Self.FK__tblRoll__RollId__625A9A57">
+            <End Role="ltRollDescription" EntitySet="ltRollDescriptions" />
+            <End Role="tblRoll" EntitySet="tblRolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__RollId__634EBE90" Association="Self.FK__tblRoll__RollId__634EBE90">
+            <End Role="ltRollDescription" EntitySet="ltRollDescriptions" />
+            <End Role="tblRoll" EntitySet="tblRolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__Species__65370702" Association="Self.FK__tblRoll__Species__65370702">
+            <End Role="ltSpecies" EntitySet="ltSpecies" />
+            <End Role="tblRoll" EntitySet="tblRolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__BuyerId__6166761E" Association="Self.FK__tblRoll__BuyerId__6166761E">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="tblRoll" EntitySet="tblRolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__SellerI__6442E2C9" Association="Self.FK__tblRoll__SellerI__6442E2C9">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="tblRoll" EntitySet="tblRolls" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Models.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Models.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="UpdateBidder">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="BuyerId" Mode="In" Type="Int32" />
+            <Parameter Name="BiddingPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="BidTotalPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="DateTimeBid" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateRoll">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="RoleID" Mode="In" Type="String" />
+            <Parameter Name="Lot" Mode="In" Type="String" />
+            <Parameter Name="Item" Mode="In" Type="String" />
+            <Parameter Name="TagNr" Mode="In" Type="String" />
+            <Parameter Name="Age" Mode="In" Type="String" />
+            <Parameter Name="DateMeasured" Mode="In" Type="String" />
+            <Parameter Name="HornLength" Mode="In" Type="String" />
+            <Parameter Name="TipToTip" Mode="In" Type="String" />
+            <Parameter Name="OtherInfo" Mode="In" Type="String" />
+            <Parameter Name="DateAvailable" Mode="In" Type="String" />
+            <Parameter Name="Male" Mode="In" Type="Int32" />
+            <Parameter Name="Female" Mode="In" Type="Int32" />
+            <Parameter Name="Young" Mode="In" Type="Int32" />
+            <Parameter Name="Quantity" Mode="In" Type="Single" />
+            <Parameter Name="Quantity_Lot" Mode="In" Type="String" />
+            <Parameter Name="Seller" Mode="In" Type="String" />
+            <Parameter Name="Bidder" Mode="In" Type="String" />
+            <Parameter Name="BiddingPrice" Mode="In" Type="Single" />
+            <Parameter Name="BidDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="BidTotalPrice" Mode="In" Type="Single" />
+            <Parameter Name="NewBidPrice" Mode="In" Type="Single" />
+            <Parameter Name="NewBidder" Mode="In" Type="String" />
+            <Parameter Name="OnAuction" Mode="In" Type="Boolean" />
+            <Parameter Name="Sold" Mode="In" Type="Boolean" />
+            <Parameter Name="DateLoaded" Mode="In" Type="DateTime" />
+            <Parameter Name="DateSold" Mode="In" Type="DateTime" />
+            <Parameter Name="PictureName" Mode="In" Type="String" />
+            <Parameter Name="Increments" Mode="In" Type="Single" />
+            <Parameter Name="ReservePrice" Mode="In" Type="Single" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateBidTimeClose">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="DateTimeClose" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="BidHistories" EntityType="Models.BidHistory" />
+          <AssociationSet Name="FK__BidHistor__LinkI__2F9A1060" Association="Models.FK__BidHistor__LinkI__2F9A1060">
+            <End Role="tblRoll" EntitySet="tblRolls" />
+            <End Role="BidHistory" EntitySet="BidHistories" />
+          </AssociationSet>
+          <FunctionImport Name="AddBidHistory">
+            <Parameter Name="LinkID" Mode="In" Type="Int32" />
+            <Parameter Name="RollId" Mode="In" Type="Int32" />
+            <Parameter Name="Lot" Mode="In" Type="String" />
+            <Parameter Name="SellerId" Mode="In" Type="Int32" />
+            <Parameter Name="BuyerId" Mode="In" Type="Int32" />
+            <Parameter Name="BiddingPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="BidTotalPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="DateTimeBid" Mode="In" Type="DateTime" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CustomersNumber">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerNumber" Mode="In" Type="String" />
+            <Parameter Name="ContactPerson" Mode="In" Type="String" />
+            <Parameter Name="eMail" Mode="In" Type="String" />
+            <Parameter Name="CellPhone" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddCustomerNum">
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+            <Parameter Name="CustomerNumber" Mode="In" Type="String" />
+            <Parameter Name="ContactPerson" Mode="In" Type="String" />
+            <Parameter Name="eMail" Mode="In" Type="String" />
+            <Parameter Name="CellPhone" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="BidHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LinkID" Type="Int32" />
+          <Property Name="RollId" Type="Int32" />
+          <Property Name="Lot" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SellerId" Type="Int32" />
+          <Property Name="BuyerId" Type="Int32" />
+          <Property Name="BiddingPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BidTotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DateTimeBid" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblRoll" Relationship="Models.FK__BidHistor__LinkI__2F9A1060" FromRole="BidHistory" ToRole="tblRoll" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__BidHistor__LinkI__2F9A1060">
+          <End Type="Models.tblRoll" Role="tblRoll" Multiplicity="0..1" />
+          <End Type="Models.BidHistory" Role="BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoll">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="LinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="AuctionDBEntities">
+          <EntitySetMapping Name="ltRollDescriptions">
+            <EntityTypeMapping TypeName="Models.ltRollDescription">
+              <MappingFragment StoreEntitySet="ltRollDescription">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ltSpecies">
+            <EntityTypeMapping TypeName="Models.ltSpecy">
+              <MappingFragment StoreEntitySet="ltSpecies">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Models.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomers">
+            <EntityTypeMapping TypeName="Models.tblCustomer">
+              <MappingFragment StoreEntitySet="tblCustomers">
+                <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="SA_ID" ColumnName="SA_ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="VATNr" ColumnName="VATNr" />
+                <ScalarProperty Name="TaxNr" ColumnName="TaxNr" />
+                <ScalarProperty Name="PostalAddress1" ColumnName="PostalAddress1" />
+                <ScalarProperty Name="PostalAddress2" ColumnName="PostalAddress2" />
+                <ScalarProperty Name="PostalAddress3" ColumnName="PostalAddress3" />
+                <ScalarProperty Name="PostalCity" ColumnName="PostalCity" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="ResAddress1" ColumnName="ResAddress1" />
+                <ScalarProperty Name="ResAddress2" ColumnName="ResAddress2" />
+                <ScalarProperty Name="ResAddress3" ColumnName="ResAddress3" />
+                <ScalarProperty Name="ResCity" ColumnName="ResCity" />
+                <ScalarProperty Name="ResPostalCode" ColumnName="ResPostalCode" />
+                <ScalarProperty Name="eMail" ColumnName="eMail" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="BankAccountNr" ColumnName="BankAccountNr" />
+                <ScalarProperty Name="Commotion" ColumnName="Commotion" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LinkKey" ColumnName="LinkKey" />
+                <ScalarProperty Name="VATRegistered" ColumnName="VATRegistered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRolls">
+            <EntityTypeMapping TypeName="Models.tblRoll">
+              <MappingFragment StoreEntitySet="tblRoll">
+                <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
+                <ScalarProperty Name="DateTimeClose" ColumnName="DateTimeClose" />
+                <ScalarProperty Name="DateTimeBid" ColumnName="DateTimeBid" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RollId" ColumnName="RollId" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="SpeciesCode" ColumnName="SpeciesCode" />
+                <ScalarProperty Name="TagNr" ColumnName="TagNr" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="DateMeasured" ColumnName="DateMeasured" />
+                <ScalarProperty Name="HornLength" ColumnName="HornLength" />
+                <ScalarProperty Name="TipToTip" ColumnName="TipToTip" />
+                <ScalarProperty Name="OtherInfo" ColumnName="OtherInfo" />
+                <ScalarProperty Name="DateAvailable" ColumnName="DateAvailable" />
+                <ScalarProperty Name="Male" ColumnName="Male" />
+                <ScalarProperty Name="Female" ColumnName="Female" />
+                <ScalarProperty Name="Young" ColumnName="Young" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Quantity_Lot" ColumnName="Quantity_Lot" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+                <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+                <ScalarProperty Name="BiddingPrice" ColumnName="BiddingPrice" />
+                <ScalarProperty Name="BidDateTime" ColumnName="BidDateTime" />
+                <ScalarProperty Name="BidTotalPrice" ColumnName="BidTotalPrice" />
+                <ScalarProperty Name="NewBidPrice" ColumnName="NewBidPrice" />
+                <ScalarProperty Name="NewBidder" ColumnName="NewBidder" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="OnAuction" ColumnName="OnAuction" />
+                <ScalarProperty Name="Sold" ColumnName="Sold" />
+                <ScalarProperty Name="DateLoaded" ColumnName="DateLoaded" />
+                <ScalarProperty Name="DateSold" ColumnName="DateSold" />
+                <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
+                <ScalarProperty Name="PictureName" ColumnName="PictureName" />
+                <ScalarProperty Name="Increments" ColumnName="Increments" />
+                <ScalarProperty Name="ReservePrice" ColumnName="ReservePrice" />
+                <ScalarProperty Name="LotQ" ColumnName="LotQ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Models.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Models.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Models.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Models.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Models.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Models.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Models.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="UpdateBidder" FunctionName="Models.Store.UpdateBidder" />
+          <FunctionImportMapping FunctionImportName="UpdateRoll" FunctionName="Models.Store.UpdateRoll" />
+          <FunctionImportMapping FunctionImportName="UpdateBidTimeClose" FunctionName="Models.Store.UpdateBidTimeClose" />
+          <EntitySetMapping Name="BidHistories">
+            <EntityTypeMapping TypeName="Models.BidHistory">
+              <MappingFragment StoreEntitySet="BidHistory">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateTimeBid" ColumnName="DateTimeBid" />
+                <ScalarProperty Name="BidTotalPrice" ColumnName="BidTotalPrice" />
+                <ScalarProperty Name="BiddingPrice" ColumnName="BiddingPrice" />
+                <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="RollId" ColumnName="RollId" />
+                <ScalarProperty Name="LinkID" ColumnName="LinkID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddBidHistory" FunctionName="Models.Store.AddBidHistory" />
+          <FunctionImportMapping FunctionImportName="CustomersNumber" FunctionName="Models.Store.CustomersNumber" />
+          <FunctionImportMapping FunctionImportName="AddCustomerNum" FunctionName="Models.Store.AddCustomerNum" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

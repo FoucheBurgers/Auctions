@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Auctions.Models;
+using System.Data.Entity;
 
 namespace Auctions.Controllers
 {
@@ -17,6 +18,8 @@ namespace Auctions.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        private AuctionDBEntities db = new AuctionDBEntities(); // FB Auction DB
 
         public AccountController()
         {
@@ -75,6 +78,9 @@ namespace Auctions.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+
+//            var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
+
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -149,19 +155,58 @@ namespace Auctions.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {CompanyName = model.CompanyName,  PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email, CustomerID = model.CustomerID, ContactPerson = model.ContactPerson, ContactCellPhone = model.ContactCellPhone };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+
+
+                    tblCustomer tblCustomers = new tblCustomer();
+                    tblCustomer tblCustomerEx = db.tblCustomers.FirstOrDefault(i => i.CustomerID == model.Email);
+
+                    if (tblCustomerEx == null)
+                    {
+                        tblCustomers.CustomerID = model.Email; // Kan dalk later verander.  
+                        tblCustomers.CompanyName = model.CompanyName;
+                        tblCustomers.CompanyID = model.CustomerID;
+                        tblCustomers.eMail = model.Email;
+                        tblCustomers.Phone = model.PhoneNumber;
+                        tblCustomers.ContactPerson = model.ContactPerson;
+                        tblCustomers.CellPhone = model.ContactCellPhone;
+                        tblCustomers.Active = true;
+                        tblCustomers.VATRegistered = false;
+
+                        db.tblCustomers.Add(tblCustomers);
+                        db.SaveChanges();
+                    }
+                   else
+                   {
+                        tblCustomer tblCustomersF = db.tblCustomers.FirstOrDefault(i => i.CustomerID == model.Email);
+                        db.Entry(tblCustomersF).State = EntityState.Modified;
+                        tblCustomersF.CompanyName = model.CompanyName;
+                        tblCustomersF.CompanyID = model.CustomerID;
+                        tblCustomersF.eMail = model.Email;
+                        tblCustomersF.Phone = model.PhoneNumber;
+                        tblCustomersF.ContactPerson = model.ContactPerson;
+                        tblCustomersF.CellPhone = model.ContactCellPhone;
+                        tblCustomersF.Active = true;
+                        tblCustomersF.VATRegistered = false;
+
+                        db.SaveChanges();
+                   }
+
+
 
                     return RedirectToAction("Index", "Home");
                 }

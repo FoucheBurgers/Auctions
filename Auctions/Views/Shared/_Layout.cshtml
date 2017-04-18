@@ -17,13 +17,36 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Bidding", "Index", "Bid")</li>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li class="reports">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Auction Roll Admin<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Auction Roll Admin", "Index", "RollAdmin")</li>
+                                <li>@Html.ActionLink("Roll Display", "Index", "RollDisplay")</li>
+                                <li>@Html.ActionLink("Admin bidding", "Index", "AdminBid")</li>
+                            </ul>
+                        </li>
+                        <li class="reports">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customers Admin<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Customers Admin", "Index", "Customers")</li>
+                                <li>@Html.ActionLink("Customers Number Admin", "Index", "CustomersNumber")</li>
+                            </ul>
+                        </li>
+
+
+                        <li>@Html.ActionLink("System Admin", "Index", "Home")</li>
+                    }
+
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -33,7 +56,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - BMC</p>
         </footer>
     </div>
 

@@ -48,6 +48,7 @@ namespace Auctions.Models
 
     public class LoginViewModel
     {
+
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]
@@ -64,10 +65,32 @@ namespace Auctions.Models
 
     public class RegisterViewModel
     {
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Company Name/Name")]
+        public string CompanyName { get; set; }
+
+
+        [Required]
+        [Display(Name = "Company ID/ID")]
+        public string CustomerID { get; set; }
+
+        [Required]
+        [Display(Name = "Cell Number")]
+        public string PhoneNumber { get; set; }
+
+
+        [Display(Name = "Contact Person")]
+        public string ContactPerson { get; set; }
+        [Display(Name = "Contact Cell")]
+         public string ContactCellPhone { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

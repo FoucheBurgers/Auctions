@@ -1,0 +1,46 @@
+﻿@model Auctions.Models.AdminBidModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bid</h2>
+@using (Html.BeginForm("Index", "AdminBid", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <body>
+        <table border="1" align="left" cellpadding="6">
+            <tbody>
+                <tr>
+                    <td>
+                        Select the Lot
+                    </td>
+                    <td>
+                        @Html.DropDownList("LotID", "Select Lot")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Select the Buyer
+                    </td>
+                    <td>
+                        @Html.DropDownList("BuyerID", "Select Buyer")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="SUBMIT THE BID" class="btn btn-default" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </body>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="SUBMIT THE BID" class="btn btn-default" />
+        </div>
+    </div>
+}

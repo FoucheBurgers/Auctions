@@ -1,0 +1,49 @@
+﻿@model Auctions.Models.AdminBidModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Admin Bid</h2>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <table border="1">
+            <tr>
+                <td>
+                    Select the Lot
+                </td>
+                <td>
+                    @Html.DropDownList("LotID", "Select Lot")
+                    @Html.ValidationMessageFor(model => model.LotID, "", new { @class = "text-danger", required = "required" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Select the Buyer
+                </td>
+                <td>
+                    @Html.DropDownList("BuyerID", "Select Buyer")
+                    @Html.ValidationMessageFor(model => model.BuyerID, "", new { @class = "text-danger", required = "required" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    New Bid
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.NewBidPrice, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "number" } })
+                    @Html.Raw(TempData["msg"])
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <input type="submit" value="SUBMIT THE BID" class="btn btn-default" />
+            </tr>
+        </table>
+    }
+</body>

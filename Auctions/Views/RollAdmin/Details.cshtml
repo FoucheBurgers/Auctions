@@ -1,0 +1,272 @@
+﻿@model Auctions.Models.tblRoll
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblRoll</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ltRollDescription.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ltRollDescription.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ltSpecy.Description)
+        </dt>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCustomer1.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCustomer1.CustomerID)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.ltSpecy.Description)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TagNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TagNr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateMeasured)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateMeasured)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HornLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HornLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipToTip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipToTip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherInfo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherInfo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Male)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Male)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Female)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Female)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Young)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Young)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity_Lot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity_Lot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BiddingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BiddingPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidTotalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidTotalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewBidPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewBidPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewBidder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewBidder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Picture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OnAuction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OnAuction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateLoaded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateLoaded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateSold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateSold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PicturePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PicturePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PictureName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PictureName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Increments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Increments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReservePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReservePrice)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCustomer.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCustomer.CustomerID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

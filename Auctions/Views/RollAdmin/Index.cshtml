@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Auctions.Models.tblRoll>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ltRollDescription.Description)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Lot)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ltSpecy.Description)
+        </th>
+        <th>
+            Seller
+        </th>
+
+        <th>
+            On Auction
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sold)
+        </th>
+
+        <th>
+            Action
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ltRollDescription1.Description)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Lot)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ltSpecy.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblCustomer1.CompanyName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.OnAuction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sold)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

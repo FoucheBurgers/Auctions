@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Auctions.Models.tblCustomer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<p>
+    @using (@Html.BeginForm("Index", "Customers", FormMethod.Get))
+    {
+        <b>Search By:</b>
+        @Html.RadioButton("searchBy", "CompName", true) <text>Company Name</text>
+        @Html.RadioButton("searchBy", "CustomerNum") <text>Customer Number</text>
+        @Html.RadioButton("searchBy", "eMial") <text>eMail</text>
+        @Html.RadioButton("searchBy", "Phone") <text>Cell Phone</text>
+        @Html.RadioButton("searchBy", "Contact") <text>Contact Person</text>
+        @Html.RadioButton("searchBy", "ContactCell") <text>Contact Cell</text><br />
+
+        @Html.TextBox("search") <input type="submit" value="search" />
+    }
+</p>
+
+
+<table class="table" border="1">
+    <tr>
+        <th>
+            <b>Client Number</b>
+        </th>
+        <th>
+            <b>Company Name</b>
+        </th>
+        <th>
+            <b>Customer Number</b>
+        </th>
+        <th>
+            <b>eMail</b>
+        </th>
+        <th>
+            <b>Cell Phone</b>
+        </th>
+
+        <th>
+            <b>Contact Person</b>
+        </th>
+
+        <th>
+            <b>Contact Cell</b>
+        </th>
+        <th>Action</th>
+    </tr>
+
+@if (Model.Count() == 0)
+{
+    <tr>
+        <td colspan="4">
+            No records match search criteria
+        </td>
+    </tr>
+}
+else
+{
+
+
+    foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerNumber)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.eMail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactPerson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CellPhone)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+}
+
+</table>

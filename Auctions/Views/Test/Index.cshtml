@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<body>
+    @using (Html.BeginForm())
+    {
+
+        <table border="1">
+            <tr>
+                <td>
+                    Select the Lot
+                </td>
+                <td>
+                    dropdowlist
+                    @*@Html.DropDownList("LotID", "Select Lot")*@
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Select the Buyer
+                </td>
+                <td>
+                    dropdowlist
+                    @*@Html.DropDownList("LotID", "Select Lot")*@
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="SUBMIT THE BID" class="btn btn-default" />
+            </tr>
+        </table>
+    }
+</body>
+
