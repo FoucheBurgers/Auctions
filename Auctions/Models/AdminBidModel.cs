@@ -16,9 +16,8 @@ namespace Auctions.Models
         [Required]
         public int BuyerID { get; set; }
         [Required]
-        
         public decimal NewBidPrice { get; set; }
-
+        public int AuctionID { get; set; }
     }
 
 }

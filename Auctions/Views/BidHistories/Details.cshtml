@@ -1,0 +1,91 @@
+﻿@model Auctions.Models.BidHistory
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BidHistory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BiddingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BiddingPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BidTotalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BidTotalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTimeBid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTimeBid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblRoll.Lot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblRoll.Lot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCustomer.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCustomer.CustomerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCustomer1.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCustomer1.CustomerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ltRollDescription.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ltRollDescription.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCustomer2.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCustomer2.CustomerID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

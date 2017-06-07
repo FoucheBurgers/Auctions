@@ -63,6 +63,8 @@ namespace Auctions
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+            // My own start up
         }
     }
 }

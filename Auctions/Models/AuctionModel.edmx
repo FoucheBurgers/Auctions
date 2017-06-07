@@ -20,6 +20,79 @@
           <Property Name="DateTimeBid" Type="datetime" />
           <Property Name="UserID" Type="int" />
         </EntityType>
+        <EntityType Name="BuyerNo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="RollID" Type="int" />
+          <Property Name="BuyerNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DefaultSetup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="BackgroundColor" Type="varchar" MaxLength="255" />
+          <Property Name="FontColor" Type="varchar" MaxLength="255" />
+          <Property Name="RefreshTime" Type="int" />
+          <Property Name="AuctionDelayTime" Type="int" />
+          <Property Name="LogoPath" Type="varchar" MaxLength="255" />
+          <Property Name="LogoName" Type="varchar" MaxLength="255" />
+          <Property Name="SmallLogoName" Type="varchar" MaxLength="255" />
+          <Property Name="RollImagesPath" Type="varchar" MaxLength="255" />
+          <Property Name="SmsNotification" Type="bit" />
+          <Property Name="LogoBackgroundColor" Type="varchar" MaxLength="255" />
+          <Property Name="SMSAllFunctionality" Type="bit" Nullable="false" />
+          <Property Name="SMSCustRegistration" Type="bit" Nullable="false" />
+          <Property Name="SMSConfirmationLoginRequired" Type="bit" Nullable="false" />
+          <Property Name="emailConfirmRegistration" Type="bit" Nullable="false" />
+          <Property Name="emailConfirmationLoginRequired" Type="bit" Nullable="false" />
+          <Property Name="BackgroundColorHome" Type="varchar" MaxLength="255" />
+          <Property Name="DefaultAuction" Type="int" />
+          <Property Name="smsOutBidder" Type="bit" />
+          <Property Name="DispLines" Type="int" />
+          <Property Name="DispColumns" Type="int" />
+          <Property Name="RollDispRefreshRate" Type="int" />
+          <Property Name="HomePeriodDescription" Type="varchar(max)" />
+          <Property Name="HomePeriodDescriptionTextColor" Type="varchar(max)" />
+          <Property Name="HomePeriodDescriptionBackColor" Type="varchar(max)" />
+          <Property Name="ActionTextColor" Type="varchar(max)" />
+          <Property Name="ActionBackColor" Type="varchar(max)" />
+          <Property Name="RollActionBidColor" Type="varchar(max)" />
+          <Property Name="RollActionBackIndexColor" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Auction.dbo.FlexiBuyerNo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FlexiBuyerNo">
+          <Key>
+            <PropertyRef Name="idKey" />
+          </Key>
+          <Property Name="BSNR" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID" Type="float" />
+          <Property Name="EVENT" Type="nvarchar" MaxLength="255" />
+          <Property Name="CUSTOMER" Type="nvarchar" MaxLength="255" />
+          <Property Name="CUST NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="UPD" Type="datetime" />
+          <Property Name="UPDBY" Type="nvarchar" MaxLength="255" />
+          <Property Name="VATNR" Type="nvarchar" MaxLength="255" />
+          <Property Name="QFIND" Type="nvarchar" MaxLength="255" />
+          <Property Name="ALT" Type="nvarchar" MaxLength="255" />
+          <Property Name="CEL" Type="nvarchar" MaxLength="255" />
+          <Property Name="TEL" Type="nvarchar" MaxLength="255" />
+          <Property Name="OPTIONAL NOTE" Type="nvarchar" MaxLength="255" />
+          <Property Name="OPTIONAL NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="VATNr1" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="255" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="StudNr" Type="nvarchar" MaxLength="255" />
+          <Property Name="BSNR1" Type="float" />
+          <Property Name="PAYM" Type="nvarchar" MaxLength="255" />
+          <Property Name="idKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="ltRollDescription">
           <Key>
             <PropertyRef Name="ID" />
@@ -27,6 +100,28 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="BackgroundColor" Type="varchar" MaxLength="255" />
+          <Property Name="FontColor" Type="varchar" MaxLength="255" />
+          <Property Name="RefreshTime" Type="int" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="AuctionDelayTime" Type="int" />
+          <Property Name="SortPosition" Type="int" />
+          <Property Name="LogoPath" Type="varchar" MaxLength="255" />
+          <Property Name="LogoName" Type="varchar" MaxLength="255" />
+          <Property Name="SmallLogoName" Type="varchar" MaxLength="255" />
+          <Property Name="RollImagesPath" Type="varchar" MaxLength="255" />
+          <Property Name="SmsNotification" Type="bit" Nullable="false" />
+          <Property Name="LogoBackgroundColor" Type="varchar" MaxLength="255" />
+          <Property Name="smsOutBidder" Type="bit" />
+          <Property Name="RollImagesBackColor" Type="varchar(max)" />
+          <Property Name="HomePeriodDescription" Type="varchar(max)" />
+          <Property Name="HomePeriodDescriptionTextColor" Type="varchar(max)" />
+          <Property Name="HomePeriodDescriptionBackColor" Type="varchar(max)" />
+          <Property Name="ActionTextColor" Type="varchar(max)" />
+          <Property Name="ActionBackColor" Type="varchar(max)" />
+          <Property Name="RollActionBidColor" Type="varchar(max)" />
+          <Property Name="RollActionBackIndexColor" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ltSpecies">
           <Key>
@@ -35,16 +130,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Active" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tblCustomers">
           <Key>
@@ -84,6 +169,9 @@
           <Property Name="LinkKey" Type="int" />
           <Property Name="VATRegistered" Type="bit" />
           <Property Name="CustomerNumber" Type="varchar(max)" />
+          <Property Name="PIN" Type="varchar" MaxLength="50" />
+          <Property Name="FICA" Type="bit" />
+          <Property Name="DateLoaded" Type="datetime" />
         </EntityType>
         <EntityType Name="tblRoll">
           <Key>
@@ -125,8 +213,22 @@
           <Property Name="DateTimeBid" Type="datetime" />
           <Property Name="DateTimeClose" Type="datetime" />
           <Property Name="CustomerNumber" Type="varchar(max)" />
+          <Property Name="BidOpen" Type="bit" />
+          <Property Name="AuctionBuyerNo" Type="varchar(max)" />
         </EntityType>
-        <Association Name="FK__BidHistor__LinkI__2F9A1060">
+        <Association Name="FK__BidHistor__Buyer__35BCFE0A">
+          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
+          <End Role="BidHistory" Type="Self.BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BidHistor__LinkI__36B12243">
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="0..1" />
           <End Role="BidHistory" Type="Self.BidHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,7 +240,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__BuyerId__0B5CAFEA">
+        <Association Name="FK__BidHistor__RollI__37A5467C">
+          <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
+          <End Role="BidHistory" Type="Self.BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="RollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BidHistor__Selle__38996AB5">
+          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
+          <End Role="BidHistory" Type="Self.BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BidHistor__UserI__398D8EEE">
+          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
+          <End Role="BidHistory" Type="Self.BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BuyerNo__Custome__3A81B327">
+          <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
+          <End Role="BuyerNo" Type="Self.BuyerNo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BuyerNo">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BuyerNo__RollID__3B75D760">
+          <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
+          <End Role="BuyerNo" Type="Self.BuyerNo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BuyerNo">
+              <PropertyRef Name="RollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DefaultSe__Defau__3C69FB99">
+          <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
+          <End Role="DefaultSetup" Type="Self.DefaultSetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DefaultSetup">
+              <PropertyRef Name="DefaultAuction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRoll__BuyerId__3D5E1FD2">
           <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,7 +324,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__BuyerId__0C50D423">
+        <Association Name="FK__tblRoll__BuyerId__3E52440B">
           <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -162,7 +336,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__RollId__0D44F85C">
+        <Association Name="FK__tblRoll__RollId__3F466844">
           <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -174,7 +348,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__RollId__0E391C95">
+        <Association Name="FK__tblRoll__RollId__403A8C7D">
           <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -186,7 +360,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__RollId__0F2D40CE">
+        <Association Name="FK__tblRoll__RollId__412EB0B6">
           <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -198,7 +372,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__RollId__10216507">
+        <Association Name="FK__tblRoll__RollId__4222D4EF">
           <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -210,7 +384,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__SellerI__11158940">
+        <Association Name="FK__tblRoll__SellerI__4316F928">
           <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -222,7 +396,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__SellerI__1209AD79">
+        <Association Name="FK__tblRoll__SellerI__440B1D61">
           <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -234,7 +408,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__Species__12FDD1B2">
+        <Association Name="FK__tblRoll__Species__44FF419A">
           <End Role="ltSpecies" Type="Self.ltSpecies" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -246,7 +420,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblRoll__Species__13F1F5EB">
+        <Association Name="FK__tblRoll__Species__45F365D3">
           <End Role="ltSpecies" Type="Self.ltSpecies" Multiplicity="0..1" />
           <End Role="tblRoll" Type="Self.tblRoll" Multiplicity="*" />
           <ReferentialConstraint>
@@ -269,6 +443,17 @@
           <Parameter Name="DateTimeBid" Type="datetime" Mode="In" />
           <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
+        <Function Name="AddCustomerFlex" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerID" Type="varchar" Mode="In" />
+          <Parameter Name="CompanyName" Type="varchar" Mode="In" />
+          <Parameter Name="ContactPerson" Type="varchar" Mode="In" />
+          <Parameter Name="eMail" Type="varchar" Mode="In" />
+          <Parameter Name="CellPhone" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="VATNr" Type="varchar" Mode="In" />
+          <Parameter Name="VATRegistered" Type="bit" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+        </Function>
         <Function Name="AddCustomerNum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyName" Type="varchar" Mode="In" />
           <Parameter Name="CustomerNumber" Type="varchar" Mode="In" />
@@ -285,128 +470,131 @@
           <Parameter Name="CellPhone" Type="varchar" Mode="In" />
           <Parameter Name="Phone" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        <Function Name="CustomersPIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="PIN" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="UpdateBidder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="BuyerId" Type="int" Mode="In" />
           <Parameter Name="BiddingPrice" Type="decimal" Mode="In" />
           <Parameter Name="BidTotalPrice" Type="decimal" Mode="In" />
           <Parameter Name="DateTimeBid" Type="datetime" Mode="In" />
+          <Parameter Name="AuctionBuyerNumber" Type="varchar" Mode="In" />
         </Function>
         <Function Name="UpdateBidTimeClose" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="DateTimeClose" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UpdateRoll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="UserAdminCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
-          <Parameter Name="RoleID" Type="varchar" Mode="In" />
-          <Parameter Name="Lot" Type="varchar" Mode="In" />
-          <Parameter Name="Item" Type="varchar" Mode="In" />
-          <Parameter Name="TagNr" Type="varchar" Mode="In" />
-          <Parameter Name="Age" Type="varchar" Mode="In" />
-          <Parameter Name="DateMeasured" Type="varchar" Mode="In" />
-          <Parameter Name="HornLength" Type="varchar" Mode="In" />
-          <Parameter Name="TipToTip" Type="varchar" Mode="In" />
-          <Parameter Name="OtherInfo" Type="varchar" Mode="In" />
-          <Parameter Name="DateAvailable" Type="varchar(max)" Mode="In" />
-          <Parameter Name="Male" Type="int" Mode="In" />
-          <Parameter Name="Female" Type="int" Mode="In" />
-          <Parameter Name="Young" Type="int" Mode="In" />
-          <Parameter Name="Quantity" Type="real" Mode="In" />
-          <Parameter Name="Quantity_Lot" Type="varchar" Mode="In" />
-          <Parameter Name="Seller" Type="varchar" Mode="In" />
-          <Parameter Name="Bidder" Type="varchar" Mode="In" />
-          <Parameter Name="BiddingPrice" Type="real" Mode="In" />
-          <Parameter Name="BidDateTime" Type="datetime" Mode="In" />
-          <Parameter Name="BidTotalPrice" Type="real" Mode="In" />
-          <Parameter Name="NewBidPrice" Type="real" Mode="In" />
-          <Parameter Name="NewBidder" Type="varchar" Mode="In" />
-          <Parameter Name="OnAuction" Type="bit" Mode="In" />
-          <Parameter Name="Sold" Type="bit" Mode="In" />
-          <Parameter Name="DateLoaded" Type="datetime" Mode="In" />
-          <Parameter Name="DateSold" Type="datetime" Mode="In" />
-          <Parameter Name="PictureName" Type="varchar" Mode="In" />
-          <Parameter Name="Increments" Type="real" Mode="In" />
-          <Parameter Name="ReservePrice" Type="real" Mode="In" />
+          <Parameter Name="Phone" Type="varchar(max)" Mode="In" />
+          <Parameter Name="PIN" Type="varchar(max)" Mode="In" />
+          <Parameter Name="FICA" Type="bit" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
         </Function>
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="BidHistory" EntityType="Self.BidHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BuyerNo" EntityType="Self.BuyerNo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DefaultSetup" EntityType="Self.DefaultSetup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ltRollDescription" EntityType="Self.ltRollDescription" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ltSpecies" EntityType="Self.ltSpecies" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCustomers" EntityType="Self.tblCustomers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoll" EntityType="Self.tblRoll" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BidHistor__LinkI__2F9A1060" Association="Self.FK__BidHistor__LinkI__2F9A1060">
+          <EntitySet Name="FlexiBuyerNo" EntityType="Self.FlexiBuyerNo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FlexiBuyerNo].[BSNR] AS [BSNR], 
+    [FlexiBuyerNo].[ID] AS [ID], 
+    [FlexiBuyerNo].[EVENT] AS [EVENT], 
+    [FlexiBuyerNo].[CUSTOMER] AS [CUSTOMER], 
+    [FlexiBuyerNo].[CUST NAME] AS [CUST NAME], 
+    [FlexiBuyerNo].[UPD] AS [UPD], 
+    [FlexiBuyerNo].[UPDBY] AS [UPDBY], 
+    [FlexiBuyerNo].[VATNR] AS [VATNR], 
+    [FlexiBuyerNo].[QFIND] AS [QFIND], 
+    [FlexiBuyerNo].[ALT] AS [ALT], 
+    [FlexiBuyerNo].[CEL] AS [CEL], 
+    [FlexiBuyerNo].[TEL] AS [TEL], 
+    [FlexiBuyerNo].[OPTIONAL NOTE] AS [OPTIONAL NOTE], 
+    [FlexiBuyerNo].[OPTIONAL NAME] AS [OPTIONAL NAME], 
+    [FlexiBuyerNo].[VATNr1] AS [VATNr1], 
+    [FlexiBuyerNo].[ADDRESS] AS [ADDRESS], 
+    [FlexiBuyerNo].[EMAIL] AS [EMAIL], 
+    [FlexiBuyerNo].[StudNr] AS [StudNr], 
+    [FlexiBuyerNo].[BSNR1] AS [BSNR1], 
+    [FlexiBuyerNo].[PAYM] AS [PAYM], 
+    [FlexiBuyerNo].[idKey] AS [idKey]
+    FROM [dbo].[FlexiBuyerNo] AS [FlexiBuyerNo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__BidHistor__Buyer__35BCFE0A" Association="Self.FK__BidHistor__Buyer__35BCFE0A">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="BidHistory" EntitySet="BidHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BidHistor__LinkI__36B12243" Association="Self.FK__BidHistor__LinkI__36B12243">
             <End Role="tblRoll" EntitySet="tblRoll" />
             <End Role="BidHistory" EntitySet="BidHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__BuyerId__0B5CAFEA" Association="Self.FK__tblRoll__BuyerId__0B5CAFEA">
+          <AssociationSet Name="FK__BidHistor__RollI__37A5467C" Association="Self.FK__BidHistor__RollI__37A5467C">
+            <End Role="ltRollDescription" EntitySet="ltRollDescription" />
+            <End Role="BidHistory" EntitySet="BidHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BidHistor__Selle__38996AB5" Association="Self.FK__BidHistor__Selle__38996AB5">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="BidHistory" EntitySet="BidHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BidHistor__UserI__398D8EEE" Association="Self.FK__BidHistor__UserI__398D8EEE">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="BidHistory" EntitySet="BidHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BuyerNo__Custome__3A81B327" Association="Self.FK__BuyerNo__Custome__3A81B327">
+            <End Role="tblCustomers" EntitySet="tblCustomers" />
+            <End Role="BuyerNo" EntitySet="BuyerNo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BuyerNo__RollID__3B75D760" Association="Self.FK__BuyerNo__RollID__3B75D760">
+            <End Role="ltRollDescription" EntitySet="ltRollDescription" />
+            <End Role="BuyerNo" EntitySet="BuyerNo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DefaultSe__Defau__3C69FB99" Association="Self.FK__DefaultSe__Defau__3C69FB99">
+            <End Role="ltRollDescription" EntitySet="ltRollDescription" />
+            <End Role="DefaultSetup" EntitySet="DefaultSetup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRoll__BuyerId__3D5E1FD2" Association="Self.FK__tblRoll__BuyerId__3D5E1FD2">
             <End Role="tblCustomers" EntitySet="tblCustomers" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__BuyerId__0C50D423" Association="Self.FK__tblRoll__BuyerId__0C50D423">
+          <AssociationSet Name="FK__tblRoll__BuyerId__3E52440B" Association="Self.FK__tblRoll__BuyerId__3E52440B">
             <End Role="tblCustomers" EntitySet="tblCustomers" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__RollId__0D44F85C" Association="Self.FK__tblRoll__RollId__0D44F85C">
+          <AssociationSet Name="FK__tblRoll__RollId__3F466844" Association="Self.FK__tblRoll__RollId__3F466844">
             <End Role="ltRollDescription" EntitySet="ltRollDescription" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__RollId__0E391C95" Association="Self.FK__tblRoll__RollId__0E391C95">
+          <AssociationSet Name="FK__tblRoll__RollId__403A8C7D" Association="Self.FK__tblRoll__RollId__403A8C7D">
             <End Role="ltRollDescription" EntitySet="ltRollDescription" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__RollId__0F2D40CE" Association="Self.FK__tblRoll__RollId__0F2D40CE">
+          <AssociationSet Name="FK__tblRoll__RollId__412EB0B6" Association="Self.FK__tblRoll__RollId__412EB0B6">
             <End Role="ltRollDescription" EntitySet="ltRollDescription" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__RollId__10216507" Association="Self.FK__tblRoll__RollId__10216507">
+          <AssociationSet Name="FK__tblRoll__RollId__4222D4EF" Association="Self.FK__tblRoll__RollId__4222D4EF">
             <End Role="ltRollDescription" EntitySet="ltRollDescription" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__SellerI__11158940" Association="Self.FK__tblRoll__SellerI__11158940">
+          <AssociationSet Name="FK__tblRoll__SellerI__4316F928" Association="Self.FK__tblRoll__SellerI__4316F928">
             <End Role="tblCustomers" EntitySet="tblCustomers" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__SellerI__1209AD79" Association="Self.FK__tblRoll__SellerI__1209AD79">
+          <AssociationSet Name="FK__tblRoll__SellerI__440B1D61" Association="Self.FK__tblRoll__SellerI__440B1D61">
             <End Role="tblCustomers" EntitySet="tblCustomers" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__Species__12FDD1B2" Association="Self.FK__tblRoll__Species__12FDD1B2">
+          <AssociationSet Name="FK__tblRoll__Species__44FF419A" Association="Self.FK__tblRoll__Species__44FF419A">
             <End Role="ltSpecies" EntitySet="ltSpecies" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblRoll__Species__13F1F5EB" Association="Self.FK__tblRoll__Species__13F1F5EB">
+          <AssociationSet Name="FK__tblRoll__Species__45F365D3" Association="Self.FK__tblRoll__Species__45F365D3">
             <End Role="ltSpecies" EntitySet="ltSpecies" />
             <End Role="tblRoll" EntitySet="tblRoll" />
           </AssociationSet>
@@ -424,6 +612,31 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblRolls" Relationship="Self.FK__tblRoll__RollId__625A9A57" FromRole="ltRollDescription" ToRole="tblRoll" />
           <NavigationProperty Name="tblRolls1" Relationship="Self.FK__tblRoll__RollId__634EBE90" FromRole="ltRollDescription" ToRole="tblRoll" />
+          <Property Name="BackgroundColor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FontColor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RefreshTime" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="AuctionDelayTime" Type="Int32" />
+          <Property Name="SortPosition" Type="Int32" />
+          <Property Name="LogoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LogoName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SmallLogoName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RollImagesPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SmsNotification" Type="Boolean" Nullable="false" />
+          <Property Name="LogoBackgroundColor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BuyerNoes" Relationship="Models.FK__BuyerNo__RollID__79FD19BE" FromRole="ltRollDescription" ToRole="BuyerNo" />
+          <Property Name="smsOutBidder" Type="Boolean" />
+          <NavigationProperty Name="BidHistories" Relationship="Models.FK__BidHistor__RollI__2F650636" FromRole="ltRollDescription" ToRole="BidHistory" />
+          <Property Name="RollImagesBackColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DefaultSetups" Relationship="Models.FK__DefaultSe__Defau__3C69FB99" FromRole="ltRollDescription" ToRole="DefaultSetup" />
+          <Property Name="HomePeriodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HomePeriodDescriptionTextColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HomePeriodDescriptionBackColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActionTextColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActionBackColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RollActionBidColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RollActionBackIndexColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ltSpecy">
           <Key>
@@ -433,16 +646,6 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblRolls" Relationship="Self.FK__tblRoll__Species__65370702" FromRole="ltSpecies" ToRole="tblRoll" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tblCustomer">
           <Key>
@@ -484,6 +687,13 @@
           <NavigationProperty Name="tblRolls" Relationship="Self.FK__tblRoll__BuyerId__6166761E" FromRole="tblCustomers" ToRole="tblRoll" />
           <NavigationProperty Name="tblRolls1" Relationship="Self.FK__tblRoll__SellerI__6442E2C9" FromRole="tblCustomers" ToRole="tblRoll" />
           <Property Name="CustomerNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BuyerNoes" Relationship="Models.FK__BuyerNo__Custome__7908F585" FromRole="tblCustomer" ToRole="BuyerNo" />
+          <Property Name="PIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FICA" Type="Boolean" />
+          <NavigationProperty Name="BidHistories" Relationship="Models.FK__BidHistor__Selle__28B808A7" FromRole="tblCustomer" ToRole="BidHistory" />
+          <NavigationProperty Name="BidHistories1" Relationship="Models.FK__BidHistor__Buyer__2E70E1FD" FromRole="tblCustomer" ToRole="BidHistory" />
+          <NavigationProperty Name="BidHistories2" Relationship="Models.FK__BidHistor__UserI__30592A6F" FromRole="tblCustomer" ToRole="BidHistory" />
+          <Property Name="DateLoaded" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tblRoll">
           <Key>
@@ -531,6 +741,8 @@
           <Property Name="DateTimeClose" Type="DateTime" Precision="3" />
           <Property Name="CustomerNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BidHistories" Relationship="Models.FK__BidHistor__LinkI__2F9A1060" FromRole="tblRoll" ToRole="BidHistory" />
+          <Property Name="BidOpen" Type="Boolean" />
+          <Property Name="AuctionBuyerNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__tblRoll__RollId__625A9A57">
           <End Role="ltRollDescription" Type="Self.ltRollDescription" Multiplicity="0..1" />
@@ -595,7 +807,6 @@
         <EntityContainer Name="AuctionDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ltRollDescriptions" EntityType="Self.ltRollDescription" />
           <EntitySet Name="ltSpecies" EntityType="Self.ltSpecy" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
           <EntitySet Name="tblRolls" EntityType="Self.tblRoll" />
           <AssociationSet Name="FK__tblRoll__RollId__625A9A57" Association="Self.FK__tblRoll__RollId__625A9A57">
@@ -654,6 +865,7 @@
             <Parameter Name="BiddingPrice" Mode="In" Type="Decimal" />
             <Parameter Name="BidTotalPrice" Mode="In" Type="Decimal" />
             <Parameter Name="DateTimeBid" Mode="In" Type="DateTime" />
+            <Parameter Name="AuctionBuyerNumber" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UpdateRoll">
             <Parameter Name="ID" Mode="In" Type="Int32" />
@@ -723,7 +935,63 @@
             <Parameter Name="CellPhone" Mode="In" Type="String" />
             <Parameter Name="Phone" Mode="In" Type="String" />
           </FunctionImport>
-        </EntityContainer>
+          <EntitySet Name="BuyerNoes" EntityType="Models.BuyerNo" />
+          <AssociationSet Name="FK__BuyerNo__Custome__7908F585" Association="Models.FK__BuyerNo__Custome__7908F585">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="BuyerNo" EntitySet="BuyerNoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BuyerNo__RollID__79FD19BE" Association="Models.FK__BuyerNo__RollID__79FD19BE">
+            <End Role="ltRollDescription" EntitySet="ltRollDescriptions" />
+            <End Role="BuyerNo" EntitySet="BuyerNoes" />
+          </AssociationSet>
+          <FunctionImport Name="AddCustomerFlex">
+            <Parameter Name="CustomerID" Mode="In" Type="String" />
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+            <Parameter Name="ContactPerson" Mode="In" Type="String" />
+            <Parameter Name="eMail" Mode="In" Type="String" />
+            <Parameter Name="CellPhone" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="VATNr" Mode="In" Type="String" />
+            <Parameter Name="VATRegistered" Mode="In" Type="Boolean" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="AddCustomerFlexTest">
+          <Parameter Name="CustomerID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UserAdminCustomer">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="PIN" Mode="In" Type="String" />
+            <Parameter Name="FICA" Mode="In" Type="Boolean" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <AssociationSet Name="FK__BidHistor__Selle__28B808A7" Association="Models.FK__BidHistor__Selle__28B808A7">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="BidHistory" EntitySet="BidHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BidHistor__Buyer__2E70E1FD" Association="Models.FK__BidHistor__Buyer__2E70E1FD">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="BidHistory" EntitySet="BidHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BidHistor__RollI__2F650636" Association="Models.FK__BidHistor__RollI__2F650636">
+            <End Role="ltRollDescription" EntitySet="ltRollDescriptions" />
+            <End Role="BidHistory" EntitySet="BidHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BidHistor__UserI__30592A6F" Association="Models.FK__BidHistor__UserI__30592A6F">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="BidHistory" EntitySet="BidHistories" />
+          </AssociationSet>
+          <FunctionImport Name="CustomersPIN">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="PIN" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="FlexiBuyerNoes" EntityType="Models.FlexiBuyerNo" />
+          <EntitySet Name="DefaultSetups" EntityType="Models.DefaultSetup" />
+          <AssociationSet Name="FK__DefaultSe__Defau__3C69FB99" Association="Models.FK__DefaultSe__Defau__3C69FB99">
+            <End Role="ltRollDescription" EntitySet="ltRollDescriptions" />
+            <End Role="DefaultSetup" EntitySet="DefaultSetups" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -750,6 +1018,10 @@
           <Property Name="DateTimeBid" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblRoll" Relationship="Models.FK__BidHistor__LinkI__2F9A1060" FromRole="BidHistory" ToRole="tblRoll" />
           <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="tblCustomer" Relationship="Models.FK__BidHistor__Selle__28B808A7" FromRole="BidHistory" ToRole="tblCustomer" />
+          <NavigationProperty Name="tblCustomer1" Relationship="Models.FK__BidHistor__Buyer__2E70E1FD" FromRole="BidHistory" ToRole="tblCustomer" />
+          <NavigationProperty Name="ltRollDescription" Relationship="Models.FK__BidHistor__RollI__2F650636" FromRole="BidHistory" ToRole="ltRollDescription" />
+          <NavigationProperty Name="tblCustomer2" Relationship="Models.FK__BidHistor__UserI__30592A6F" FromRole="BidHistory" ToRole="tblCustomer" />
         </EntityType>
         <Association Name="FK__BidHistor__LinkI__2F9A1060">
           <End Type="Models.tblRoll" Role="tblRoll" Multiplicity="0..1" />
@@ -763,7 +1035,165 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="BuyerNo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="RollID" Type="Int32" />
+          <Property Name="BuyerNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblCustomer" Relationship="Models.FK__BuyerNo__Custome__7908F585" FromRole="BuyerNo" ToRole="tblCustomer" />
+          <NavigationProperty Name="ltRollDescription" Relationship="Models.FK__BuyerNo__RollID__79FD19BE" FromRole="BuyerNo" ToRole="ltRollDescription" />
+        </EntityType>
+        <Association Name="FK__BuyerNo__Custome__7908F585">
+          <End Type="Models.tblCustomer" Role="tblCustomer" Multiplicity="0..1" />
+          <End Type="Models.BuyerNo" Role="BuyerNo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BuyerNo">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BuyerNo__RollID__79FD19BE">
+          <End Type="Models.ltRollDescription" Role="ltRollDescription" Multiplicity="0..1" />
+          <End Type="Models.BuyerNo" Role="BuyerNo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BuyerNo">
+              <PropertyRef Name="RollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BidHistor__Selle__28B808A7">
+          <End Type="Models.tblCustomer" Role="tblCustomer" Multiplicity="0..1" />
+          <End Type="Models.BidHistory" Role="BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BidHistor__Buyer__2E70E1FD">
+          <End Type="Models.tblCustomer" Role="tblCustomer" Multiplicity="0..1" />
+          <End Type="Models.BidHistory" Role="BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BidHistor__RollI__2F650636">
+          <End Type="Models.ltRollDescription" Role="ltRollDescription" Multiplicity="0..1" />
+          <End Type="Models.BidHistory" Role="BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="RollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BidHistor__UserI__30592A6F">
+          <End Type="Models.tblCustomer" Role="tblCustomer" Multiplicity="0..1" />
+          <End Type="Models.BidHistory" Role="BidHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BidHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FlexiBuyerNo">
+          <Key>
+            <PropertyRef Name="idKey" />
+          </Key>
+          <Property Name="BSNR" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Double" />
+          <Property Name="EVENT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOMER" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UPD" Type="DateTime" Precision="3" />
+          <Property Name="UPDBY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VATNR" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="QFIND" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ALT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CEL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TEL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OPTIONAL_NOTE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OPTIONAL_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VATNr1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StudNr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BSNR1" Type="Double" />
+          <Property Name="PAYM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="idKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DefaultSetup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="BackgroundColor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FontColor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RefreshTime" Type="Int32" />
+          <Property Name="AuctionDelayTime" Type="Int32" />
+          <Property Name="LogoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LogoName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SmallLogoName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RollImagesPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SmsNotification" Type="Boolean" />
+          <Property Name="LogoBackgroundColor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SMSAllFunctionality" Type="Boolean" Nullable="false" />
+          <Property Name="SMSCustRegistration" Type="Boolean" Nullable="false" />
+          <Property Name="SMSConfirmationLoginRequired" Type="Boolean" Nullable="false" />
+          <Property Name="emailConfirmRegistration" Type="Boolean" Nullable="false" />
+          <Property Name="emailConfirmationLoginRequired" Type="Boolean" Nullable="false" />
+          <Property Name="BackgroundColorHome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultAuction" Type="Int32" />
+          <Property Name="smsOutBidder" Type="Boolean" />
+          <Property Name="DispLines" Type="Int32" />
+          <Property Name="DispColumns" Type="Int32" />
+          <NavigationProperty Name="ltRollDescription" Relationship="Models.FK__DefaultSe__Defau__3C69FB99" FromRole="DefaultSetup" ToRole="ltRollDescription" />
+          <Property Name="RollDispRefreshRate" Type="Int32" />
+          <Property Name="HomePeriodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HomePeriodDescriptionTextColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HomePeriodDescriptionBackColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActionTextColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActionBackColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RollActionBidColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RollActionBackIndexColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__DefaultSe__Defau__3C69FB99">
+          <End Type="Models.ltRollDescription" Role="ltRollDescription" Multiplicity="0..1" />
+          <End Type="Models.DefaultSetup" Role="DefaultSetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ltRollDescription">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DefaultSetup">
+              <PropertyRef Name="DefaultAuction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -772,6 +1202,28 @@
           <EntitySetMapping Name="ltRollDescriptions">
             <EntityTypeMapping TypeName="Models.ltRollDescription">
               <MappingFragment StoreEntitySet="ltRollDescription">
+                <ScalarProperty Name="RollActionBackIndexColor" ColumnName="RollActionBackIndexColor" />
+                <ScalarProperty Name="RollActionBidColor" ColumnName="RollActionBidColor" />
+                <ScalarProperty Name="ActionBackColor" ColumnName="ActionBackColor" />
+                <ScalarProperty Name="ActionTextColor" ColumnName="ActionTextColor" />
+                <ScalarProperty Name="HomePeriodDescriptionBackColor" ColumnName="HomePeriodDescriptionBackColor" />
+                <ScalarProperty Name="HomePeriodDescriptionTextColor" ColumnName="HomePeriodDescriptionTextColor" />
+                <ScalarProperty Name="HomePeriodDescription" ColumnName="HomePeriodDescription" />
+                <ScalarProperty Name="RollImagesBackColor" ColumnName="RollImagesBackColor" />
+                <ScalarProperty Name="smsOutBidder" ColumnName="smsOutBidder" />
+                <ScalarProperty Name="LogoBackgroundColor" ColumnName="LogoBackgroundColor" />
+                <ScalarProperty Name="SmsNotification" ColumnName="SmsNotification" />
+                <ScalarProperty Name="RollImagesPath" ColumnName="RollImagesPath" />
+                <ScalarProperty Name="SmallLogoName" ColumnName="SmallLogoName" />
+                <ScalarProperty Name="LogoName" ColumnName="LogoName" />
+                <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+                <ScalarProperty Name="SortPosition" ColumnName="SortPosition" />
+                <ScalarProperty Name="AuctionDelayTime" ColumnName="AuctionDelayTime" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="RefreshTime" ColumnName="RefreshTime" />
+                <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+                <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
@@ -787,20 +1239,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Models.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblCustomers">
             <EntityTypeMapping TypeName="Models.tblCustomer">
               <MappingFragment StoreEntitySet="tblCustomers">
+                <ScalarProperty Name="DateLoaded" ColumnName="DateLoaded" />
+                <ScalarProperty Name="FICA" ColumnName="FICA" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
                 <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
@@ -841,6 +1285,8 @@
           <EntitySetMapping Name="tblRolls">
             <EntityTypeMapping TypeName="Models.tblRoll">
               <MappingFragment StoreEntitySet="tblRoll">
+                <ScalarProperty Name="AuctionBuyerNo" ColumnName="AuctionBuyerNo" />
+                <ScalarProperty Name="BidOpen" ColumnName="BidOpen" />
                 <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
                 <ScalarProperty Name="DateTimeClose" ColumnName="DateTimeClose" />
                 <ScalarProperty Name="DateTimeBid" ColumnName="DateTimeBid" />
@@ -880,32 +1326,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Models.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Models.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Models.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Models.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Models.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Models.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Models.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Models.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Models.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="UpdateBidder" FunctionName="Models.Store.UpdateBidder" />
-          <FunctionImportMapping FunctionImportName="UpdateRoll" FunctionName="Models.Store.UpdateRoll" />
           <FunctionImportMapping FunctionImportName="UpdateBidTimeClose" FunctionName="Models.Store.UpdateBidTimeClose" />
           <EntitySetMapping Name="BidHistories">
             <EntityTypeMapping TypeName="Models.BidHistory">
@@ -926,6 +1347,83 @@
           <FunctionImportMapping FunctionImportName="AddBidHistory" FunctionName="Models.Store.AddBidHistory" />
           <FunctionImportMapping FunctionImportName="CustomersNumber" FunctionName="Models.Store.CustomersNumber" />
           <FunctionImportMapping FunctionImportName="AddCustomerNum" FunctionName="Models.Store.AddCustomerNum" />
+          <EntitySetMapping Name="BuyerNoes">
+            <EntityTypeMapping TypeName="Models.BuyerNo">
+              <MappingFragment StoreEntitySet="BuyerNo">
+                <ScalarProperty Name="BuyerNumber" ColumnName="BuyerNumber" />
+                <ScalarProperty Name="RollID" ColumnName="RollID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddCustomerFlex" FunctionName="Models.Store.AddCustomerFlex" />
+          <FunctionImportMapping FunctionImportName="UserAdminCustomer" FunctionName="Models.Store.UserAdminCustomer" />
+          <FunctionImportMapping FunctionImportName="CustomersPIN" FunctionName="Models.Store.CustomersPIN" />
+          <EntitySetMapping Name="FlexiBuyerNoes">
+            <EntityTypeMapping TypeName="Models.FlexiBuyerNo">
+              <MappingFragment StoreEntitySet="FlexiBuyerNo">
+                <ScalarProperty Name="idKey" ColumnName="idKey" />
+                <ScalarProperty Name="PAYM" ColumnName="PAYM" />
+                <ScalarProperty Name="BSNR1" ColumnName="BSNR1" />
+                <ScalarProperty Name="StudNr" ColumnName="StudNr" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="VATNr1" ColumnName="VATNr1" />
+                <ScalarProperty Name="OPTIONAL_NAME" ColumnName="OPTIONAL NAME" />
+                <ScalarProperty Name="OPTIONAL_NOTE" ColumnName="OPTIONAL NOTE" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="CEL" ColumnName="CEL" />
+                <ScalarProperty Name="ALT" ColumnName="ALT" />
+                <ScalarProperty Name="QFIND" ColumnName="QFIND" />
+                <ScalarProperty Name="VATNR" ColumnName="VATNR" />
+                <ScalarProperty Name="UPDBY" ColumnName="UPDBY" />
+                <ScalarProperty Name="UPD" ColumnName="UPD" />
+                <ScalarProperty Name="CUST_NAME" ColumnName="CUST NAME" />
+                <ScalarProperty Name="CUSTOMER" ColumnName="CUSTOMER" />
+                <ScalarProperty Name="EVENT" ColumnName="EVENT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BSNR" ColumnName="BSNR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DefaultSetups">
+            <EntityTypeMapping TypeName="Models.DefaultSetup">
+              <MappingFragment StoreEntitySet="DefaultSetup">
+                <ScalarProperty Name="RollActionBackIndexColor" ColumnName="RollActionBackIndexColor" />
+                <ScalarProperty Name="RollActionBidColor" ColumnName="RollActionBidColor" />
+                <ScalarProperty Name="ActionBackColor" ColumnName="ActionBackColor" />
+                <ScalarProperty Name="ActionTextColor" ColumnName="ActionTextColor" />
+                <ScalarProperty Name="HomePeriodDescriptionBackColor" ColumnName="HomePeriodDescriptionBackColor" />
+                <ScalarProperty Name="HomePeriodDescriptionTextColor" ColumnName="HomePeriodDescriptionTextColor" />
+                <ScalarProperty Name="HomePeriodDescription" ColumnName="HomePeriodDescription" />
+                <ScalarProperty Name="RollDispRefreshRate" ColumnName="RollDispRefreshRate" />
+                <ScalarProperty Name="DispColumns" ColumnName="DispColumns" />
+                <ScalarProperty Name="DispLines" ColumnName="DispLines" />
+                <ScalarProperty Name="smsOutBidder" ColumnName="smsOutBidder" />
+                <ScalarProperty Name="DefaultAuction" ColumnName="DefaultAuction" />
+                <ScalarProperty Name="BackgroundColorHome" ColumnName="BackgroundColorHome" />
+                <ScalarProperty Name="emailConfirmationLoginRequired" ColumnName="emailConfirmationLoginRequired" />
+                <ScalarProperty Name="emailConfirmRegistration" ColumnName="emailConfirmRegistration" />
+                <ScalarProperty Name="SMSConfirmationLoginRequired" ColumnName="SMSConfirmationLoginRequired" />
+                <ScalarProperty Name="SMSCustRegistration" ColumnName="SMSCustRegistration" />
+                <ScalarProperty Name="SMSAllFunctionality" ColumnName="SMSAllFunctionality" />
+                <ScalarProperty Name="LogoBackgroundColor" ColumnName="LogoBackgroundColor" />
+                <ScalarProperty Name="SmsNotification" ColumnName="SmsNotification" />
+                <ScalarProperty Name="RollImagesPath" ColumnName="RollImagesPath" />
+                <ScalarProperty Name="SmallLogoName" ColumnName="SmallLogoName" />
+                <ScalarProperty Name="LogoName" ColumnName="LogoName" />
+                <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+                <ScalarProperty Name="AuctionDelayTime" ColumnName="AuctionDelayTime" />
+                <ScalarProperty Name="RefreshTime" ColumnName="RefreshTime" />
+                <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+                <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

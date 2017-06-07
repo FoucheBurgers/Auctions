@@ -1,0 +1,92 @@
+﻿@model Auctions.Models.tblRoll
+
+<meta http-equiv="refresh" content=@ViewBag.RefreshTime />
+
+<p style="font-size: 18px; font-weight: bolder; color:  #F4080C">LOT : @Html.DisplayFor(model => Model.Lot, new { htmlAttributes = new { @class = "form-control" } })</p>
+<p style="font-size: 16px; font-weight: bolder;">@Html.DisplayFor(model => Model.ltSpecy.Description, new { htmlAttributes = new { @class = "form-control" } })</p>
+
+
+
+@if (Model.Age != null && Model.Age != "")
+{<p style="font-size: 16px; font-weight: bolder;">Age/DOB : @Html.DisplayFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })</p>}
+@if (Model.DateMeasured != null && Model.DateMeasured != "")
+{<p style="font-size: 16px; font-weight: bolder;">Date Measured : @Html.DisplayFor(model => model.DateMeasured, new { htmlAttributes = new { @class = "form-control" } })</p>}
+@if (Model.HornLength != null && Model.HornLength != "")
+{<p style="font-size: 16px; font-weight: bolder;">Horn Length : @Html.DisplayFor(model => model.HornLength, new { htmlAttributes = new { @class = "form-control" } })</p>}
+@if (Model.TipToTip != null && Model.TipToTip != "")
+{<p style="font-size: 16px; font-weight: bolder;">Tip to Tip : @Html.DisplayFor(model => model.TipToTip, new { htmlAttributes = new { @class = "form-control" } })</p>}
+@if (Model.OtherInfo != null && Model.OtherInfo != "")
+{<p style="font-size: 16px; font-weight: bolder;">Other : @Html.DisplayFor(model => model.OtherInfo, new { htmlAttributes = new { @class = "form-control" } })</p>}
+@if (Model.DateAvailable != null && Model.DateAvailable != "")
+{<p style="font-size: 16px; font-weight: bolder;">Available : @Html.DisplayFor(model => model.DateAvailable, new { htmlAttributes = new { @class = "form-control" } })</p>}
+
+@*PicturePath word net gebruik vir opmaak van strings*@
+ 
+@if (Model.PicturePath == null)  
+{
+    Model.PicturePath = "";
+}
+@if (Model.Male != null && Model.Male != 0)
+{
+    Model.PicturePath = Model.PicturePath + "Male: " + Model.Male;
+}
+
+@if (Model.Female != null && Model.Female != 0)
+{
+    if (Model.PicturePath != "")
+    {
+        Model.PicturePath = Model.PicturePath = Model.PicturePath + ", ";
+    }
+
+    Model.PicturePath = Model.PicturePath + "Female: " + Model.Female;
+}
+
+@if (Model.Young != null && Model.Young != 0)
+{
+    if (Model.PicturePath != "")
+    {
+        Model.PicturePath = Model.PicturePath = Model.PicturePath + ", ";
+    }
+    Model.PicturePath = Model.PicturePath + "Young: " + Model.Young;
+}
+
+@if (Model.Quantity != null && Model.Quantity != 0)
+{
+    if (Model.PicturePath != "")
+    {
+        Model.PicturePath = Model.PicturePath = Model.PicturePath + ", ";
+    }
+    if (Model.Quantity_Lot == "Lot")
+    {
+        Model.PicturePath = Model.PicturePath + "Pay for " + "1";
+    }
+    else
+    {
+        Model.PicturePath = Model.PicturePath + "Pay for " + string.Format("{0:#,#}", Model.Quantity);
+    }
+}
+
+
+@if (Model.PicturePath != null && Model.PicturePath != "")
+{<p style="font-size: 16px; font-weight: bolder;">@Html.DisplayFor(model => Model.PicturePath, new { htmlAttributes = new { @class = "form-control" } })</p>}
+
+
+@Html.Raw(TempData["msg"])
+
+<p>CURRENT BID : R <span style="color: #F4080C">@Html.DisplayFor(model => Model.BiddingPrice, new { htmlAttributes = new { @class = "form-control" } })</span></p>
+
+@*<p style="font-size: 24px">@Html.ActionLink("Place your bid", "Bid", new { id = Model.ID })</p>*@
+
+<p style="color:  #F4080C">Close in:  @ViewBag.TimeSpan</p>
+
+
+@if (Model.BidOpen == true)
+{
+    <p style="font-size: 24px">@Html.ActionLink("Place your bid", "Bid", new { id = Model.ID })</p>
+}
+else
+{
+    <p style="font-size: 24px">@Html.ActionLink("See more details", "Bid", new { id = Model.ID })</p>
+}
+
+<p style="font-size: 18px">@Html.ActionLink("Back to List of Auctions", "Index", "Home")

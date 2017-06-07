@@ -19,15 +19,46 @@ namespace Auctions.Models
         {
             this.tblRolls = new HashSet<tblRoll>();
             this.tblRolls1 = new HashSet<tblRoll>();
+            this.BuyerNoes = new HashSet<BuyerNo>();
+            this.BidHistories = new HashSet<BidHistory>();
+            this.DefaultSetups = new HashSet<DefaultSetup>();
         }
     
         public int ID { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
+        public string BackgroundColor { get; set; }
+        public string FontColor { get; set; }
+        public Nullable<int> RefreshTime { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<int> AuctionDelayTime { get; set; }
+        public Nullable<int> SortPosition { get; set; }
+        public string LogoPath { get; set; }
+        public string LogoName { get; set; }
+        public string SmallLogoName { get; set; }
+        public string RollImagesPath { get; set; }
+        public bool SmsNotification { get; set; }
+        public string LogoBackgroundColor { get; set; }
+        public Nullable<bool> smsOutBidder { get; set; }
+        public string RollImagesBackColor { get; set; }
+        public string HomePeriodDescription { get; set; }
+        public string HomePeriodDescriptionTextColor { get; set; }
+        public string HomePeriodDescriptionBackColor { get; set; }
+        public string ActionTextColor { get; set; }
+        public string ActionBackColor { get; set; }
+        public string RollActionBidColor { get; set; }
+        public string RollActionBackIndexColor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRoll> tblRolls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRoll> tblRolls1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BuyerNo> BuyerNoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BidHistory> BidHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DefaultSetup> DefaultSetups { get; set; }
     }
 }

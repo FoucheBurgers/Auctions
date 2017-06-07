@@ -1,0 +1,56 @@
+﻿@using Auctions.Models
+@model LoginViewModel
+
+<style type="text/css">
+    body {
+        background-color: @ViewBag.BackgroundColor;
+    }
+
+    body, td, th {
+        color: @ViewBag.TexColor;
+        background-color: @ViewBag.BackgroundColor;
+        font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10pt;
+    }
+</style>
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div class="row">
+    <div class="col-md-8" bgcolor="#0a374c">
+        <section id="loginForm">
+
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <table width="400" align="center" cellpadding="6" cellspacing="3">
+                    <tbody>
+                        <tr>
+                            <td>
+
+                                <img src="@Url.Content(ViewBag.LogoPath+ViewBag.LogoName)" height="103" alt="" />
+                                <hr />
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Log in" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            <td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </section>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

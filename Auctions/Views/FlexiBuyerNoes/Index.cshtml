@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Auctions.Models.ltRollDescription>
+
+@{
+    ViewBag.Title = "Load FlexiAuction Data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Load FlexiAuction Data. Data must be preloaded</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <b>Description</b>
+        </th>
+        <th><b>Action</b></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Load", "Load", new { AuctionID = item.ID})
+            </td>
+        </tr>
+    }
+
+</table>

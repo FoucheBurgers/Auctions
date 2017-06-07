@@ -15,7 +15,7 @@ namespace Auctions.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private AuctionDBEntities db = new AuctionDBEntities(); // FB Auction DB
         public ManageController()
         {
         }
@@ -233,12 +233,60 @@ namespace Auctions.Controllers
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
+                // Fouche - Update tblCustomer met nuwe PIN.
+                string Email = User.Identity.GetUserName();
+
+                tblCustomer tblCustomers = new tblCustomer();
+                tblCustomer tblCustomerEx = db.tblCustomers.FirstOrDefault(i => i.CustomerID == Email);
+                // Kry net die ID op tblCustomer 
+
+                if (tblCustomerEx == null)  // voeg by
+                {
+                    //tblCustomers.CustomerID = model.Email; // Kan dalk later verander.  
+                    //tblCustomers.CustomerID = User.Identity.
+                    //tblCustomers.CompanyName = model.CompanyName;
+                    //tblCustomers.CompanyID = model.CustomerID;
+                    //tblCustomers.eMail = model.Email;
+                    //tblCustomers.Phone = model.PhoneNumber;
+                    //tblCustomers.ContactPerson = model.ContactPerson;
+                    //tblCustomers.CellPhone = model.ContactCellPhone;
+                    //tblCustomers.Active = true;
+                    //tblCustomers.VATRegistered = false;
+                    //tblCustomers.PIN = model.PIN;
+                    //companyName = model.CompanyName;
+                    //Email = model.Email;
+
+                    //db.tblCustomers.Add(tblCustomers);
+                    //db.SaveChanges();
+                }
+                else
+                {
+                    //                    tblCustomer tblCustomersF = db.tblCustomers.FirstOrDefault(i => i.CustomerID == model.Email);
+                    //db.Entry(tblCustomersF).State = EntityState.Modified;
+                    //tblCustomersF.CompanyName = model.CompanyName;
+                    //tblCustomersF.CompanyID = model.CustomerID;
+                    //tblCustomersF.eMail = model.Email;
+                    //tblCustomersF.Phone = model.PhoneNumber;
+                    //tblCustomersF.ContactPerson = model.ContactPerson;
+                    //tblCustomersF.CellPhone = model.ContactCellPhone;
+ //                   tblCustomerEx.Active = true;
+ //                   tblCustomerEx.VATRegistered = false;
+                    tblCustomerEx.PIN = model.PIN;
+                    //companyName = model.CompanyName;
+                    //Email = model.Email;
+                    db.CustomersPIN(tblCustomerEx.ID, model.PIN);
+
+//                    db.SaveChanges();
+                }
+
+
+                // Fouche - end 
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                 if (user != null)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", "Home", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);

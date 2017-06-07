@@ -1,0 +1,216 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InvoicePDF</title>
+</head>
+<body>
+    <table width="800" border="1" align="center" cellpadding="2">
+        <tbody>
+            <tr>
+                <td width="450" rowspan="4" align="center">
+                    <img src="@Url.Content("~/Images/NWWT-2017.png")" height="250" alt="IMAGES" />
+                </td>
+                <td width="334">
+                    <p style="font-size: 16px; font-weight: bolder;" align="center">NORTH WEST WILDLIFE TRADERS </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="334" style="font-size: 12px">
+                    <p style="font-size: 10px;">
+                        NWWT WILDSKOMPLEKS, Swartruggens<br>
+                        P.O.Box 428, SWARTRUGGENS, 2835<br>
+                        E-mail: accounts@nwwt.co.za<br>
+                        Website: http://www.nwwt.co.za<br>
+                        Facebook: North West Wildlife Traders<br>
+                        Cel: 083 380 1890 Fax: 086 235 6049<br>
+                        Reg Nr: 1998/068402/23 VAT Nr: 4700182266
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="334" style="font-size: 10px">
+                    <p style="font-weight: bolder;">
+                        Bank details: First National Bank, Koster <br>
+                        Account Number: 626 8269 1087 Branchcode: 240 440
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="334" style="font-size: 12px">
+                    <p style="font-weight: bolder;">
+                        UNFINALIZED PURCHASES<br>
+                        #21-03-17@MADAM&SIR
+                    </p>
+                    <p style="font-size: 18px; font-weight: bolder;">
+                        PRO FORMA
+                    </p>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <table width="800" border="1" align="center" cellpadding="3">
+        <tbody>
+            <tr>
+                <td width="400" rowspan="1" align="left">
+                    BUYER <br>
+                    INDODO GAME BREEDERS<br>
+                    POSBUS 15<br>
+                    MONTANA PARK<br>
+                    0159
+                </td>
+
+                <td width="400" rowspan="1" align="left">
+                    TEL: N/A<br>
+                    CEL:  0798723231<br>
+                    FAX: N/A<br>
+                    VAT NR:  4320272547<br>
+                    ACCT NR:  N1_L3HKVNX
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table width="800" border="1" align="center" cellpadding="3">
+        <tbody>
+            <tr style="background:  #999999">
+                <td width="50" align="center">
+                    LOT
+                </td>
+
+                <td width="50" align="center">
+                    Buyer
+                </td>
+
+                <td align="center">
+                    Item
+                </td>
+                <td width="50" align="center">
+                    QTY
+                </td>
+                <td width="100" align="center">
+                    DESCR
+                </td>
+                <td width="75" align="center">
+                    Amount
+                </td>
+                <td width="75" align="center">
+                    TOTAL
+                </td>
+                <td width="75" align="center">
+                    VAT
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    @*Detail*@
+    @for (int a = 1; a < 5; a = a + 1)
+    {
+        <table width="800" border="1" align="center" cellpadding="3" style="font-size: 10px">
+            <tbody>
+                <tr>
+                    <td width="50" align="center">
+                        18A
+                    </td>
+
+                    <td width="50" align="center">
+                        34
+                    </td>
+
+                    <td align="left">
+                        IMPALA   Tag nr: Yellow
+                        Age: ± 5 years
+                        Date Measured: January 2017
+                        Horn Length: L: 26 2/8" R: 26"
+                        Tip to tip 13 6/8"
+                        Other info: Sought-after genetics
+                        Available: April 2017
+                    </td>
+                    <td width="50" align="center">
+                        3
+                    </td>
+                    <td width="100" align="center">
+                        F1 M1 Y1
+                    </td>
+                    <td width="75" align="right">
+                        35,000
+                    </td>
+                    <td width="75" align="right">
+                        100,350,000
+                    </td>
+                    <td width="75" align="right">
+                        3 500
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    @*footer*@
+    <p></p>
+
+    <table width="800" border="1" align="center" cellpadding="3" style="font-size: 10px">
+        <tbody>
+            <tr style="background:  #999999">
+                <td align="center">
+                    DUE
+                </td>
+                <td align="center" width="150">
+                    BEFORE VAT
+                </td>
+                <td align="right" width="150">
+                    VAT
+                </td>
+                <td align="right" width="150">
+                    INCLUSIVE
+                </td>
+            </tr>
+
+            <tr>
+                <td align="left">
+                    PURCHASES
+                </td>
+                <td align="center" width="150">
+                    
+                </td>
+                <td align="right" width="150">
+                    
+                </td>
+                <td align="right" width="150">
+                    
+                </td>
+            </tr>
+
+            <tr>
+                <td align="left">
+                    COMMISSION
+                </td>
+                <td align="center" width="150"></td>
+                <td align="right" width="150"></td>
+                <td align="right" width="150"></td>
+            </tr>
+
+            <tr>
+                <td align="left">
+                    TOTAL
+                </td>
+                <td align="center" width="150"></td>
+                <td align="right" width="150"></td>
+                <td align="right" width="150"></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>

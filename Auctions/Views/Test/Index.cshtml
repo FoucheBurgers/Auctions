@@ -1,38 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Result</title>
+</head>
 <body>
-    @using (Html.BeginForm())
-    {
-
-        <table border="1">
-            <tr>
-                <td>
-                    Select the Lot
-                </td>
-                <td>
-                    dropdowlist
-                    @*@Html.DropDownList("LotID", "Select Lot")*@
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Select the Buyer
-                </td>
-                <td>
-                    dropdowlist
-                    @*@Html.DropDownList("LotID", "Select Lot")*@
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="SUBMIT THE BID" class="btn btn-default" />
-            </tr>
-        </table>
-    }
+    <div> 
+        @ViewBag.res
+    </div>
 </body>
-
+</html>

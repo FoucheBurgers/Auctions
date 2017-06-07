@@ -1,0 +1,7 @@
+﻿@model decimal?
+
+@Html.TextBox(
+    "",
+    string.Format("{0:0.###}", ViewData.Model),
+    new { @class = "text-box single-line" }
+)

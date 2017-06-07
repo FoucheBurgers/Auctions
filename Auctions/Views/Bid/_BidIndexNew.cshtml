@@ -1,0 +1,146 @@
+﻿@model Auctions.Models.tblRoll
+
+<style>
+    a.my-class:link {
+        color: rgba(255,2,7,1);
+    }
+
+    a.my-class:visited {
+        color: rgba(255,2,7,1);
+    }
+
+    a.my-class2:link {
+        color: #E8D777;
+    }
+
+    a.my-class2:visited {
+        color: #E8D777;
+    }
+</style>
+<meta http-equiv="refresh" content=@ViewBag.RefreshTime />
+
+<tr style="border:3px solid black" width="200">
+    <td style="border:3px solid black" width="286" bgcolor=@ViewBag.BackgroundColor>
+        LOT : @Html.DisplayFor(model => Model.Lot, new { htmlAttributes = new { @class = "form-control" } })
+        / @Html.DisplayFor(model => Model.ltSpecy.Description, new { htmlAttributes = new { @class = "form-control" } })
+
+    </td>
+    <td style="border:3px solid black" width="99" rowspan="2" bgcolor=@ViewBag.BackgroundColor>Seller image </td>
+    @*<td width="99" rowspan="2" bgcolor="#544D32"><img src="images/Marius Roothman Boerdery.png" width="98" height="64" alt="" /></td>*@
+</tr>
+
+<tr>
+    @if (Model.PicturePath == null)
+    {
+        Model.PicturePath = "";
+    }
+    @if (Model.Male != null && Model.Male != 0)
+    {
+        Model.PicturePath = Model.PicturePath + "Male: " + Model.Male;
+    }
+
+    @if (Model.Female != null && Model.Female != 0)
+    {
+        if (Model.PicturePath != "")
+        {
+            Model.PicturePath = Model.PicturePath = Model.PicturePath + " / ";
+        }
+
+        Model.PicturePath = Model.PicturePath + "Female: " + Model.Female;
+    }
+
+    @if (Model.Young != null && Model.Young != 0)
+    {
+        if (Model.PicturePath != "")
+        {
+            Model.PicturePath = Model.PicturePath = Model.PicturePath + " / ";
+        }
+        Model.PicturePath = Model.PicturePath + "Young: " + Model.Young;
+    }
+
+    @if (Model.Quantity != null && Model.Quantity != 0)
+    {
+        if (Model.PicturePath != "")
+        {
+            Model.PicturePath = Model.PicturePath = Model.PicturePath + " / ";
+        }
+        if (Model.Quantity_Lot == "Lot")
+        {
+            Model.PicturePath = Model.PicturePath + "Pay for " + "1";
+        }
+        else
+        {
+            Model.PicturePath = Model.PicturePath + "Pay for " + string.Format("{0:#,#}", Model.Quantity);
+        }
+    }
+
+    @if (Model.PicturePath != null && Model.PicturePath != "")
+    {
+        <td bgcolor=@ViewBag.BackgroundColor>
+            @Html.DisplayFor(model => Model.PicturePath, new { htmlAttributes = new { @class = "form-control" } })
+        </td>
+    }
+</tr>
+@if (Model.DateMeasured != null || Model.HornLength != null || Model.TipToTip != null)
+{
+    <tr style="border:3px solid black">
+        <td style="border:3px solid black" bgcolor=@ViewBag.BackgroundColor colspan="2">
+            @if (Model.DateMeasured != null && Model.DateMeasured != "")
+            {
+                <p style="font-size: 16px; font-weight: bolder;">Date Measured : @Html.DisplayFor(model => model.DateMeasured, new { htmlAttributes = new { @class = "form-control" } })</p>}
+            @if (Model.HornLength != null && Model.HornLength != "")
+            {
+                <p style="font-size: 16px; font-weight: bolder;">Horn Length : @Html.DisplayFor(model => model.HornLength, new { htmlAttributes = new { @class = "form-control" } })</p>}
+            @if (Model.TipToTip != null && Model.TipToTip != "")
+            {
+                <p style="font-size: 16px; font-weight: bolder;">Tip to Tip : @Html.DisplayFor(model => model.TipToTip, new { htmlAttributes = new { @class = "form-control" } })</p>}
+        </td>
+    </tr>
+}
+@if (Model.DateAvailable != null || Model.OtherInfo != null)
+{
+    <tr style="border:3px solid black">
+        <td style="border:3px solid black" bgcolor=@ViewBag.BackgroundColor colspan="2">
+            @if (Model.OtherInfo != null && Model.OtherInfo != "")
+            {<p style="font-size: 16px; font-weight: bolder;">Other : @Html.DisplayFor(model => model.OtherInfo, new { htmlAttributes = new { @class = "form-control" } })</p>}
+            @if (Model.DateAvailable != null && Model.DateAvailable != "")
+            {<p style="font-size: 16px; font-weight: bolder;">Available : @Html.DisplayFor(model => model.DateAvailable, new { htmlAttributes = new { @class = "form-control" } })</p>}
+        </td>
+    </tr>
+}
+
+<tr style="border:3px solid black">
+    <td style="border:3px solid black" bgcolor=@ViewBag.BackgroundColor>
+        CURRENT BID : R <span style="color: rgba(250,8,12,1)">@Html.DisplayFor(model => Model.BiddingPrice, new { htmlAttributes = new { @class = "form-control" } })</span>
+    </td>
+    <td style="border:3px solid black" bgcolor=@ViewBag.BackgroundColor>
+        @Html.DisplayFor(model => Model.AuctionBuyerNo, new { htmlAttributes = new { @class = "form-control" } })
+    </td>
+</tr>
+
+<tr style="border:3px solid black">
+    <td style="border:3px solid black" colspan="2" bgcolor="#F90307">CLOSE IN :  @ViewBag.TimeSpan</td>
+</tr>
+
+        @if (Model.BidOpen == true)
+        {
+
+      <td colspan="2" bgcolor=@ViewBag.RollActionBidColor style="font-size: 18px">
+				@Html.ActionLink("PLACE YOUR BID", "Bid", new { id = Model.ID }, new { @class = "my-class" })
+			</td>
+        }
+        else
+        {
+      <td colspan="2" bgcolor=@ViewBag.RollActionBidColor style="font-size: 18px">
+                @Html.ActionLink("SEE MORE DETAILS", "Bid", new { id = Model.ID }, new { @class = "my-class" })
+			</td>
+        }
+	</tr>
+
+	<tr>
+      <td colspan="2" bgcolor=@ViewBag.RollActionBackIndexColor style="font-size: 18px">
+			@Html.ActionLink("BACK TO LIST OF AUCTIONS", "Index", "Home", null, new { @class = "my-class2" })
+	  </td>
+    </tr>
+
+<tr style="height:10px"></tr>

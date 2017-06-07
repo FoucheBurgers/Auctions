@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Auctions.Models.tblRoll>
+
+@{
+    ViewBag.Title = "Index";
+}
+<head>
+    <meta charset="UTF-8">
+    <title>NWWT Silent Auction</title>
+    <style type="text/css">
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-color: #000000;
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+
+        body, td, th {
+            font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 24px;
+            color: rgba(254,254,254,1);
+            text-align: center;
+            font-size: 12pt;
+        }
+
+        a.my-class:link {
+            color: #ffffff;
+        }
+
+        a.my-class:visited {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+
+<body vlink="#E79A11">
+
+    @Html.Raw(TempData["msg"])
+    <table width="400" align="center" cellpadding="6" cellspacing="3" style="border:3px solid black">
+        <tbody>
+
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="4">
+                        <p></p>
+                        <p></p>
+                        @ViewBag.emptyMessage
+                        <p></p>
+                        <p></p>
+                        @Html.ActionLink("See Auction List", "Index", "Home")
+                        <p></p>
+
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+
+                    TimeSpan? difference = DateTime.Now - DateTime.Now;
+                    if (item.DateTimeClose != null && item.DateTimeClose > DateTime.Now)
+                    {
+
+                        difference = item.DateTimeClose - DateTime.Now;
+                    }
+                    else
+                    {
+                        difference = DateTime.Now - DateTime.Now;
+                    }
+                    int days = difference.Value.Days;
+                    int hours = difference.Value.Hours;
+                    int minutes = difference.Value.Minutes;
+                    int seconds = difference.Value.Seconds;
+                    ViewBag.TimeSpan = "";
+                    if (days > 0)
+                    {
+                        ViewBag.TimeSpan = days.ToString() + " Days, ";
+                    }
+                    if (hours > 0)
+                    {
+                        ViewBag.TimeSpan = ViewBag.TimeSpan + hours.ToString() + " Hours, ";
+                    }
+                    ViewBag.TimeSpan = ViewBag.TimeSpan + minutes.ToString() + " Minutes, " + seconds.ToString() + " Seconds";
+
+                    <tr style="text-align: left; font-size: 18pt" width="416">
+
+                        <td colspan="2" bgcolor=@ViewBag.RollImageBackColor style="border:3px solid black">
+
+                            <img src=@Url.Content(@ViewBag.ImagePath + item.PictureName) style="vertical-align: middle; width: 400px; background-color : @ViewBag.RollImageBackColor">
+
+                            @*van hier*@
+
+                            @Html.Partial("_BidIndexNew", item)
+
+                            @*tot hier*@
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>

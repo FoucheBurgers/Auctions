@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Phone and Email confirmation </h2>
+
+
+<hr />
+
+<table class="table" border="0">
+    <tr>
+        <th>
+            <b>User Name</b>
+        </th>
+        <th>
+            <b>Cell Phone Confirmation</b>
+        </th>
+        <th>
+            <b>eMail Confirmation</b>
+        </th>
+        <th>
+            <b>eMail Confirmation</b>
+        </th>
+    </tr>
+    @*</table>*@
+
+    @foreach (var role in Model)
+    {
+        <tr>
+            <td>
+                <strong>@role.UserName </strong>
+            </td>
+            <td>
+                <strong>@role.PhoneNumberConfirmed </strong>
+            </td>
+            <td>
+                <strong>@role.EmailConfirmed </strong>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { UserName = role.UserName })
+            </td>
+        </tr>
+    }
+</table>
+
+@*<span onclick="return confirm('Are you sure to delete?')"><a href="/UserAdminRoles/Delete?RoleName=@role.UserName" class="delLink" style="color:red;">Delete</a></span> |
+    @Html.ActionLink("Edit", "Edit", new { roleName = @role.UserName })*@

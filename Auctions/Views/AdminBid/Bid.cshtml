@@ -1,0 +1,57 @@
+﻿@model Auctions.Models.tblRoll
+
+@{
+    ViewBag.Title = "Admin Bid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Admin Bid</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Place a Bid</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.RollId)
+        @Html.HiddenFor(model => model.BuyerId)
+
+        <div class="form-group">
+            <p style="font-size: 18px; font-weight: bolder; color:  #F4080C">LOT : @Html.DisplayFor(model => model.Lot, new { htmlAttributes = new { @class = "form-control" } })</p>
+            <p style="font-size: 16px; font-weight: bolder;"> @Html.DisplayFor(modelItem => Model.ltSpecy.Description)
+
+        </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.BuyerId, "BuyerId", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    <b>Buyres Number </b> @Html.DropDownList("CustomerNumber", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BuyerId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        @*}*@
+
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.NewBidPrice, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <b>New Bid </b>@Html.EditorFor(model => model.NewBidPrice, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "number" } })
+                @Html.ValidationMessageFor(model => model.NewBidPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.Raw(TempData["msg"])
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Bid " class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { AuctionID = ViewBag.rollIDBag })
+</div>

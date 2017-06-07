@@ -1,0 +1,164 @@
+﻿@model Auctions.Models.DefaultSetup
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DefaultSetup</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackgroundColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackgroundColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FontColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FontColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefreshTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefreshTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuctionDelayTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuctionDelayTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogoPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogoName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmallLogoName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmallLogoName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RollImagesPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RollImagesPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackgroundColorHome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackgroundColorHome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoBackgroundColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogoBackgroundColor)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmsNotification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmsNotification)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SMSAllFunctionality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SMSAllFunctionality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SMSCustRegistration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SMSCustRegistration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SMSConfirmationLoginRequired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SMSConfirmationLoginRequired)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailConfirmRegistration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailConfirmRegistration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailConfirmationLoginRequired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailConfirmationLoginRequired)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

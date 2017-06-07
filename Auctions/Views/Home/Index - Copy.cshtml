@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Auctions.Models.ltRollDescription>
+
+@{
+    ViewBag.Title = "NWWT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <title>NWWT Silent Auction</title>
+    <style type="text/css">
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-color: #000000;
+            background-image: url(images/Sable-2017_100px.png);
+            background-repeat: repeat;
+        }
+
+        body, td, th {
+            /*color: #FFFFFF;*/
+            color: white;
+            font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-align: center;
+            font-size: 12pt;
+            /*color:white;*/
+        }
+    </style>
+</head>
+
+
+<body>
+    @Html.Raw(TempData["msg"])
+    <table width="390" align="center" cellpadding="6" cellspacing="3" border="1">
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr bgcolor=@item.LogoBackgroundColor>
+                    <td>
+                        <a href="@Url.Action("Index", "Bid", new { AuctionId = item.ID })">
+                        <img src=@Url.Content(item.LogoPath + item.LogoName) style="vertical-align: middle; width: 380px; height : 289px; background-color : @item.LogoBackgroundColor">
+                        </a>
+                    </td>
+                </tr>
+                <tr bgcolor=@item.LogoBackgroundColor font color="white" style="text-align: left">
+                    <td style="font-size: 18pt">
+                        @Html.ActionLink("VIEW ROLL/PLACE YOUR BID", "Index", "Bid", new { AuctionId = item.ID }, null)
+                    </td>
+                </tr>
+                    <tr style="height:10px"></tr>
+            }
+        </tbody>
+    </table>
+</body>

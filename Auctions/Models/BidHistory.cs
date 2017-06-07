@@ -26,5 +26,9 @@ namespace Auctions.Models
         public Nullable<int> UserID { get; set; }
     
         public virtual tblRoll tblRoll { get; set; }
+        public virtual tblCustomer tblCustomer { get; set; }
+        public virtual tblCustomer tblCustomer1 { get; set; }
+        public virtual ltRollDescription ltRollDescription { get; set; }
+        public virtual tblCustomer tblCustomer2 { get; set; }
     }
 }

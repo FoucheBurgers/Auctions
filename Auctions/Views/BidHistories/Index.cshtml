@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Auctions.Models.BidHistory>
+
+@{
+    ViewBag.Title = "Bid History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@using (@Html.BeginForm("Index", "BidHistories", FormMethod.Get))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DropDownList("AuctionID", null, "Select Auction", htmlAttributes: new { onchange = "this.form.submit();" })
+                @Html.DropDownList("Lot", (SelectList)ViewBag.Lot, "All/Select Lot", new { onchange = "this.form.submit();" })
+            </th>
+        </tr>
+    </table>
+}
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            Auction
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Lot)
+        </th>
+        <th>
+            Seller
+        </th>
+        <th>
+            Current bidder
+        </th>
+        <th>
+            Bid price
+        </th>
+        <th>
+            Total value
+        </th>
+        <th>
+            Date and Time
+        </th>
+        <th>
+            User
+        </th>
+        <th></th>
+    </tr>
+    @{int i = 1; }
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @(i++)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ltRollDescription.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblCustomer.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblCustomer1.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BiddingPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidTotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeBid)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.tblRoll.Lot)
+                </td>*@
+
+            <td>
+                @Html.DisplayFor(modelItem => item.tblCustomer2.CompanyName)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                </td>*@
+        </tr>
+    }
+
+</table>
+<a href="@Url.Action("ExportPDF", "BidHistories")"> Export pdf</a>

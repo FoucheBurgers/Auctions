@@ -1,0 +1,299 @@
+﻿@model Auctions.Models.tblCustomer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblCustomer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SA_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SA_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VATNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VATNr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxNr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalAddress1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalAddress1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalAddress2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalAddress2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalAddress3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalAddress3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResAddress1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResAddress1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResAddress2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResAddress2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResAddress3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResAddress3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResPostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResPostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CellPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CellPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bank)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BranchName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BranchName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BranchCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BranchCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankAccountNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankAccountNr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commotion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commotion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Agent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Language)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Language)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VATRegistered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VATRegistered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FICA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FICA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -19,6 +19,10 @@ namespace Auctions.Models
         {
             this.tblRolls = new HashSet<tblRoll>();
             this.tblRolls1 = new HashSet<tblRoll>();
+            this.BuyerNoes = new HashSet<BuyerNo>();
+            this.BidHistories = new HashSet<BidHistory>();
+            this.BidHistories1 = new HashSet<BidHistory>();
+            this.BidHistories2 = new HashSet<BidHistory>();
         }
     
         public int ID { get; set; }
@@ -55,10 +59,21 @@ namespace Auctions.Models
         public Nullable<int> LinkKey { get; set; }
         public Nullable<bool> VATRegistered { get; set; }
         public string CustomerNumber { get; set; }
+        public string PIN { get; set; }
+        public Nullable<bool> FICA { get; set; }
+        public Nullable<System.DateTime> DateLoaded { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRoll> tblRolls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblRoll> tblRolls1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BuyerNo> BuyerNoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BidHistory> BidHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BidHistory> BidHistories1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BidHistory> BidHistories2 { get; set; }
     }
 }

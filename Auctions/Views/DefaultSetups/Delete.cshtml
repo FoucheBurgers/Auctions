@@ -1,0 +1,121 @@
+﻿@model Auctions.Models.DefaultSetup
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DefaultSetup</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackgroundColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackgroundColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FontColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FontColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefreshTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefreshTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuctionDelayTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuctionDelayTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogoPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogoName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmallLogoName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmallLogoName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RollImagesPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RollImagesPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmsNotification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmsNotification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoBackgroundColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogoBackgroundColor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

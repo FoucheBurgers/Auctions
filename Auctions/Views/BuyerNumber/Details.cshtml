@@ -1,0 +1,43 @@
+﻿@model Auctions.Models.BuyerNo
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BuyerNo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BuyerNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuyerNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCustomer.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCustomer.CustomerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ltRollDescription.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ltRollDescription.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index", new { AuctionID = ViewBag.rollIDBag })
+</p>

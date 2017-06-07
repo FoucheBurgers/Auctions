@@ -17,10 +17,50 @@ namespace Auctions.Controllers
         // GET: RollDisplay
         public ActionResult Index()
         {
-            var tblRolls = db.tblRolls.Include(t => t.ltRollDescription).Include(t => t.ltRollDescription1).Include(t => t.ltSpecy).Include(t => t.tblCustomer);
- //           int count = tblRolls.Count();
+            string sessionID = "0";
 
+            if (Session["auctionID"] == null) // Must have selected an auction.
+            {
+                // Gaan terug na roll
+                TempData["msg"] = "<script>alert('Select an auction first');</script>";
+                return RedirectToAction("Index", "Home");
+            }
 
+            sessionID = Session["auctionID"].ToString();
+            int AuctionID = AuctionID = Int32.Parse(sessionID);
+
+            BidController bd = new BidController();
+            DefaultSetupModel dm = bd.LoadDefs(AuctionID); // Get the default values 
+
+            int? rollID = dm.ID;
+            ViewBag.BackgroundColor = dm.BackgroundColor;
+            ViewBag.TexColor = dm.FontColor;
+            ViewBag.LogoBackgroundColor = dm.LogoBackgroundColor;
+            ViewBag.ImagePath = dm.RollImagePath;
+            ViewBag.LogoPath = dm.LogoPath;
+            ViewBag.LogoName = dm.LogoName;
+            ViewBag.RefreshTime = dm.RefreshTime.ToString();
+            ViewBag.ImagePath = dm.RollImagePath;
+            ViewBag.emptyMessage = dm.message;
+
+            string initApp = "Web";
+            if (Session["InitApp"] != null)
+            {
+                initApp = Session["InitApp"].ToString();
+            }
+            
+
+            if (initApp == "App")
+            {
+                ViewBag.Columns = 0;
+            }
+            else
+            {
+                ViewBag.Columns = 2;
+            }
+
+            
+            var tblRolls = db.tblRolls.Include(t => t.ltRollDescription).Include(t => t.ltRollDescription1).Include(t => t.ltSpecy).Include(t => t.tblCustomer).Where(t => t.RollId == rollID);
             return View(tblRolls.ToList());
         }
 

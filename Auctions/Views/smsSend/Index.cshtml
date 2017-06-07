@@ -1,0 +1,44 @@
+﻿@model Auctions.Models.smsSendModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>sms To Clients</h2>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <table border="0">
+            <tr>
+                <td width="600">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <b>Cell Number </b>@Html.EditorFor(model => model.CellNumber, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "number" } })
+                            @Html.ValidationMessageFor(model => model.CellNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="600">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <b>Message </b>@Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", required = "required"} })
+                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p></p>
+                    <input type="submit" value="SUBMIT SMS" class="btn btn-default" />
+            </tr>
+        </table>
+    }
+    <p></p>
+    <p></p>
+    @ViewBag.ResultMessage
+</body>

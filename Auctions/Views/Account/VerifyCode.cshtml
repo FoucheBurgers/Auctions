@@ -10,6 +10,8 @@
     @Html.Hidden("provider", @Model.Provider)
     @Html.Hidden("rememberMe", @Model.RememberMe)
     <h4>Enter verification code</h4>
+     
+
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -26,6 +28,7 @@
             </div>
         </div>
     </div>
+    <h4>If you do not received your code or if the code expired, please Log In and resend the code.</h4>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Submit" />

@@ -1,57 +1,96 @@
-﻿<!doctype html>
-<html>
+﻿@model IEnumerable<Auctions.Models.ltRollDescription>
+
+@{
+    ViewBag.Title = "NWWT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <head>
     <meta charset="UTF-8">
     <title>NWWT Silent Auction</title>
     <style type="text/css">
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
         body {
             background-color: #000000;
-            background-image: url(images/Sable-2017_100px.png);
-            background-repeat: repeat;
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
         }
 
         body, td, th {
-            color: #FFFFFF;
+            font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 24px;
+            color: rgba(254,254,254,1);
+            text-align: center;
+            font-size: 12pt;
+
+            /*color: #FFFFFF;*/
+            /*color: white;
+
             font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
             font-style: normal;
             font-weight: normal;
             text-align: center;
-            font-size: 12pt;
+            font-size: 12pt;*/
+            /*color:white;*/
         }
+
+        a.my-class:link {
+            color: #ffffff;
+        }
+        a.my-class:visited {
+            color: #ffffff;
+        }
+
     </style>
 </head>
 
-<body>
-    <table width="1000" align="center" cellpadding="6" cellspacing="3">
+
+<body vlink="#E79A11">
+
+    @Html.Raw(TempData["msg"])
+    <table width="400" align="center" cellpadding="6" cellspacing="3" style="border:3px solid black">
         <tbody>
-            <tr>
-                <td bgcolor="#0A374C"><img src="~/Images/UNYATI_-intro.jpg" width="613" height="528" alt="" /></td>
-            </tr>
-            <tr>
-                <td bgcolor="#999595" style="color: #0A374C; text-align: center;">LOGIN / REGISTER – UNYATI</td>
-            </tr>
-            <tr style="text-align: left">
-                <td bgcolor="#FFFFFF"><img src="~/Images/DisselB.jpg" width="631" height="605" alt="" /></td>
-            </tr>
-            <tr bgcolor="#999595" style="text-align: left">
-                <td style="font-weight: normal">LOGIN / REGISTER – DISSELBOOM</td>
-            </tr>
-            <tr bgcolor="#3C3C3C" style="text-align: left">
-                <td bgcolor="#FFFFFF" style="font-weight: normal"><img src="~/Images/Ytdiebos.jpg" width="631" height="545" alt="" /></td>
-            </tr>
-            <tr style="text-align: left">
-                <td bgcolor="#999595" style="font-weight: normal">LOGIN / REGISTER – YTDIEBOS</td>
-            </tr>
-            <tr style="text-align: left">
-                <td bgcolor="#FFFFFF" style="font-weight: normal"><img src="~/Images/Highvalue.jpg" width="631" height="470" alt="" /></td>
-            </tr>
-            <tr style="text-align: left">
-                <td bgcolor="#999595" style="font-weight: normal">LOGIN / REGISTER – HOË-WAARDE</td>
-            </tr>
-            <tr style="text-align: left">
-                <td height="100" bgcolor="#190D01" style="font-weight: normal"><img src="~/Images/banner_bottom.jpg" width="1000" height="110" alt="" /></td>
-            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr bgcolor=@item.LogoBackgroundColor>
+                    <td>
+                        <a href="@Url.Action("Index", "Bid", new { AuctionId = item.ID })">
+                            <img src=@Url.Content(item.LogoPath + item.LogoName) style="vertical-align: middle; width: 400px; background-color : @item.LogoBackgroundColor">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor=@item.HomePeriodDescriptionBackColor style="font-size: 18pt; border:2px solid black">
+                        
+                        @Html.DisplayFor(modelItem => item.HomePeriodDescription)
+                    
+                    </td>
+
+
+                </tr>
+
+                @*<tr>
+                    <td bgcolor="#4E3B0B"><a href="roll.html">DISPLAY ROLL</a> / PLACE YOUR BID</td>
+                </tr>*@
+
+                <tr bgcolor=@item.ActionBackColor style="text-align: left; border:2px solid black">
+                    <td style="font-size: 18pt">
+                        @*@Html.ActionLink("DISPLAY ROLL/PLACE YOUR BID", "Index", "Bid", new { AuctionId = item.ID }, null)*@
+                        @Html.ActionLink("DISPLAY ROLL/PLACE YOUR BID", "Index", "Bid", new { AuctionId = item.ID }, new { @class = "my-class" })
+                    </td>
+                </tr>
+                <tr style="height:10px"></tr>
+
+            }
         </tbody>
     </table>
 </body>
-</html>

@@ -57,6 +57,23 @@ namespace Auctions.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+
+        [StringLength(20, MinimumLength = 4, ErrorMessage = "PIN must be greater than or equal 4 characters.")]
+        [RegularExpression(@"([0-9]+)", ErrorMessage = "Must be a Number.")]
+        [Display(Name = "PIN to confirm Bidding")]
+        public string PIN { get; set; }
+
+        [Required]
+        [Display(Name = "Confirm PIN")]
+        [Compare("PIN", ErrorMessage = "The PIN and confirmation PIN do not match.")]
+        public string ConfirmPIN { get; set; }
+
+        [Display(Name = "Terms and Conditions")]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "You must Accept Terms and Conditions!")]
+        public bool TermsAndConditions { get; set; }
+
     }
 
     public class AddPhoneNumberViewModel
@@ -65,6 +82,7 @@ namespace Auctions.Models
         [Phone]
         [Display(Name = "Phone Number")]
         public string Number { get; set; }
+        public string email { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
@@ -77,6 +95,41 @@ namespace Auctions.Models
         [Phone]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+        public string userID { get; set; }
+        public string email { get; set; }
+        public string CompanyName { get; set; }
+
+    }
+
+    public class AdminConfirmCell
+    {
+        [Display(Name = "Code")]
+        public string Code { get; set; }
+                [Required]
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+        public string userID { get; set; }
+        [Required]
+        public string email { get; set; }
+//        public string CompanyName { get; set; }
+
+    }
+
+
+    public class ResentCodeModel
+    {
+//        [Required]
+        [Display(Name = "Code")]
+        public string Code { get; set; }
+
+        [Required]
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        public string userID { get; set; }
+        public string email { get; set; }
     }
 
     public class ConfigureTwoFactorViewModel

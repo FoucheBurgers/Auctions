@@ -1,0 +1,101 @@
+﻿@model Auctions.Models.tblRoll
+<td width="334">
+
+    <p style="font-size: 18px; font-weight: bolder; color:  #F4080C">LOT : @Html.DisplayFor(model => model.Lot, new { htmlAttributes = new { @class = "form-control" } })</p>
+    <p style="font-size: 16px; font-weight: bolder;">@Html.DisplayFor(modelItem => Model.ltSpecy.Description)</p>
+
+    @if (Model.TagNr != null && Model.TagNr != "")
+    {<p style="font-size: 16px; font-weight: bolder;">Tag : @Html.DisplayFor(model => model.TagNr, new { htmlAttributes = new { @class = "form-control" } })</p>}
+    @if (Model.Age != null && Model.Age != "")
+    {<p style="font-size: 16px; font-weight: bolder;">Age/DOB : @Html.DisplayFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })</p>}
+    @if (Model.DateMeasured != null && Model.DateMeasured != "")
+    {<p style="font-size: 16px; font-weight: bolder;">Date Measured : @Html.DisplayFor(model => model.DateMeasured, new { htmlAttributes = new { @class = "form-control" } })</p>}
+    @if (Model.HornLength != null && Model.HornLength != "")
+    {<p style="font-size: 16px; font-weight: bolder;">Horn Length : @Html.DisplayFor(model => model.HornLength, new { htmlAttributes = new { @class = "form-control" } })</p>}
+    @if (Model.TipToTip != null && Model.TipToTip != "")
+    {<p style="font-size: 16px; font-weight: bolder;">Tip to Tip : @Html.DisplayFor(model => model.TipToTip, new { htmlAttributes = new { @class = "form-control" } })</p>}
+    @if (Model.OtherInfo != null && Model.OtherInfo != "")
+    {<p style="font-size: 16px; font-weight: bolder;">Other : @Html.DisplayFor(model => model.OtherInfo, new { htmlAttributes = new { @class = "form-control" } })</p>}
+    @if (Model.DateAvailable != null && Model.DateAvailable != "")
+    {<p style="font-size: 16px; font-weight: bolder;">Available : @Html.DisplayFor(model => model.DateAvailable, new { htmlAttributes = new { @class = "form-control" } })</p>}
+
+    @if (Model.PicturePath == null)
+    {
+        Model.PicturePath = "";
+    }
+    @if (Model.Male != null && Model.Male != 0)
+    {
+        Model.PicturePath = Model.PicturePath + "Male: " + Model.Male;
+    }
+
+    @if (Model.Female != null && Model.Female != 0)
+    {
+        if (Model.PicturePath != "")
+        {
+            Model.PicturePath = Model.PicturePath = Model.PicturePath + ", ";
+        }
+
+        Model.PicturePath = Model.PicturePath + "Female: " + Model.Female;
+    }
+
+    @if (Model.Young != null && Model.Young != 0)
+    {
+        if (Model.PicturePath != "")
+        {
+            Model.PicturePath = Model.PicturePath = Model.PicturePath + ", ";
+        }
+        Model.PicturePath = Model.PicturePath + "Young: " + Model.Young;
+    }
+
+    @if (Model.Quantity != null && Model.Quantity != 0)
+    {
+        if (Model.PicturePath != "")
+        {
+            Model.PicturePath = Model.PicturePath = Model.PicturePath + ", ";
+        }
+        if (Model.Quantity_Lot == "Lot")
+        {
+            Model.PicturePath = Model.PicturePath + "Pay for " + "1";
+        }
+        else
+        {
+            Model.PicturePath = Model.PicturePath + "Pay for " + string.Format("{0:#,#}", Model.Quantity);
+        }
+
+    }
+    @if (Model.PicturePath != null && Model.PicturePath != "")
+    {<p style="font-size: 16px; font-weight: bolder;">@Html.DisplayFor(model => model.PicturePath, new { htmlAttributes = new { @class = "form-control" } })</p>}
+
+</td>
+<tr style="text-align: left">
+    <td align="center" valign="middle">
+        <p style="font-size: 16px; font-weight: bolder;">BID PER  <span style="color: #F4080C">@Html.DisplayFor(model => model.Quantity_Lot, new { htmlAttributes = new { @class = "form-control" } })</span></p>
+        <p style="font-size: 16px; font-weight: bolder;">CURRENT BID UNIT PRICE : R <span style="color: #F4080C">@Html.DisplayFor(model => model.BiddingPrice, new { htmlAttributes = new { @class = "form-control" } })</span></p>
+        <p style="font-size: 16px; font-weight: bolder;">TOTAL BID VALUE : R <span style="color: #F4080C">@Html.DisplayFor(model => model.BidTotalPrice, new { htmlAttributes = new { @class = "form-control" } })</span></p>
+        <p align="center" style="font-size: 16px; font-weight: bolder;">MINIMUM INCREMENT: R <span style="color: #F4080C">@Html.DisplayFor(model => model.Increments, new { htmlAttributes = new { @class = "form-control" } })</span></p>
+    </td>
+</tr>
+<tr style="text-align: left" border="1">
+    <td>
+     
+        @if (Model.BidOpen == true)
+        {
+            <p style="font-size: 16px; font-weight: bolder;">ENTER YOUR BID </p>
+            <p align="center" style="font-size: 16px; font-weight: bolder;">
+                @Html.EditorFor(model => model.NewBidPrice, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "number" } })
+                @Html.ValidationMessageFor(model => model.NewBidPrice, "", new { @class = "text-danger" })
+            </p>
+            <p style="font-size: 16px; font-weight: bolder;">ENTER YOUR PIN </p>
+            <p align="center" style="font-size: 16px; font-weight: bolder;">
+                @Html.PasswordFor(model => model.CustomerNumber, new { @class = "form-control" })
+            </p>
+            <p>
+                <input type="submit" value="SUBMIT YOUR BID (Excluding VAT)" class="btn btn-default" />
+            </p>
+        }
+        else
+        {
+            <p style="font-size: 12px; font-weight: bolder; color:  #F4080C">LOT NOT YET OPEN FOR BIDDING</p>
+        }
+    </td>
+</tr>

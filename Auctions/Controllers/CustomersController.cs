@@ -20,27 +20,27 @@ namespace Auctions.Controllers
         {
             if (searchBy == "CompName")
             {
-                return View(db.tblCustomers.Where(x => x.CompanyName.StartsWith(search) || search == null).ToList());
+                return View(db.tblCustomers.Where(x => x.CompanyName.Contains(search) || search == null).ToList());
             }
             else if (searchBy == "CustomerNum")
             {
-                return View(db.tblCustomers.Where(x => x.CustomerNumber.StartsWith(search) || search == null).ToList());
+                return View(db.tblCustomers.Where(x => x.CustomerNumber.Contains(search) || search == null).ToList());
             }
             else if (searchBy == "eMial")
             {
-                return View(db.tblCustomers.Where(x => x.eMail.StartsWith(search) || search == null).ToList());
+                return View(db.tblCustomers.Where(x => x.eMail.Contains(search) || search == null).ToList());
             }
             else if (searchBy == "Phone")
             {
-                return View(db.tblCustomers.Where(x => x.Phone.StartsWith(search) || search == null).ToList());
+                return View(db.tblCustomers.Where(x => x.Phone.Contains(search) || search == null).ToList());
             }
             else if (searchBy == "Contact")
             {
-                return View(db.tblCustomers.Where(x => x.ContactPerson.StartsWith(search) || search == null).ToList());
+                return View(db.tblCustomers.Where(x => x.ContactPerson.Contains(search) || search == null).ToList());
             }
             else
             {
-                return View(db.tblCustomers.Where(x => x.CellPhone.StartsWith(search) || search == null).ToList());
+                return View(db.tblCustomers.Where(x => x.CellPhone.Contains(search) || search == null).ToList());
             }
         }
 
@@ -70,7 +70,7 @@ namespace Auctions.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID, CustomerID, Name, Surname, CompanyName, ContactPerson, SA_ID, CompanyID, VATNr, TaxNr, PostalAddress1, PostalAddress2, PostalAddress3, PostalCity, PostalCode, ResAddress1, ResAddress2, ResAddress3, ResCity, ResPostalCode, eMail, CellPhone, Phone, Bank, BranchName, BranchCode, BankAccountNr, Commotion, Agent, Language, Active, LinkKey, VATRegistered, CustomerNumber")] tblCustomer tblCustomer)
+        public ActionResult Create([Bind(Include = "ID, CustomerID, Name, Surname, CompanyName, ContactPerson, SA_ID, CompanyID, VATNr, TaxNr, PostalAddress1, PostalAddress2, PostalAddress3, PostalCity, PostalCode, ResAddress1, ResAddress2, ResAddress3, ResCity, ResPostalCode, eMail, CellPhone, Phone, Bank, BranchName, BranchCode, BankAccountNr, Commotion, Agent, Language, Active, LinkKey, VATRegistered, CustomerNumber,PIN,FICA,DateLoaded")] tblCustomer tblCustomer)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace Auctions.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CustomerID,Name,Surname,CompanyName,ContactPerson,SA_ID,CompanyID,VATNr,TaxNr,PostalAddress1,PostalAddress2,PostalAddress3,PostalCity,PostalCode,ResAddress1,ResAddress2,ResAddress3,ResCity,ResPostalCode,eMail,CellPhone,Phone,Bank,BranchName,BranchCode,BankAccountNr,Commotion,Agent,Language,Active,LinkKey,VATRegistered, CustomerNumber")] tblCustomer tblCustomer)
+        public ActionResult Edit([Bind(Include = "ID,CustomerID,Name,Surname,CompanyName,ContactPerson,SA_ID,CompanyID,VATNr,TaxNr,PostalAddress1,PostalAddress2,PostalAddress3,PostalCity,PostalCode,ResAddress1,ResAddress2,ResAddress3,ResCity,ResPostalCode,eMail,CellPhone,Phone,Bank,BranchName,BranchCode,BankAccountNr,Commotion,Agent,Language,Active,LinkKey,VATRegistered, CustomerNumber,PIN,FICA,DateLoaded")] tblCustomer tblCustomer)
         {
             if (ModelState.IsValid)
             {

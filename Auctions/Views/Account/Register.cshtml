@@ -1,16 +1,18 @@
 ﻿@model Auctions.Models.RegisterViewModel
 <style type="text/css">
     body {
-        background-color: #000000;
+        background-color: @ViewBag.BackgroundColor;
+        p    {color: red;};
     }
 
     body, td, th {
-        color: #FFFFFF;
-        background-color: #0a374c;
+        color: @ViewBag.TexColor;
+        background-color: @ViewBag.BackgroundColor;
         font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 10pt;
+
     }
 </style>
 
@@ -21,89 +23,152 @@
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <table width="1000" align="center" cellpadding="6" cellspacing="3">
-        <tbody>
-            <tr>
-                <td width="813">
+<body>
 
-                    <h4>Create a new account.</h4>
-                    <hr />
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <table width="1000" align="center" cellpadding="6" cellspacing="3">
+            <tbody>
+                <tr>
+                    <td width="813">
 
-
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.CompanyName, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" })
+                        <h4>Create a new account.</h4>
+                        <hr />
+                        @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        <div bgcolor="#0A374C">
+                            <img src="@Url.Content(ViewBag.LogoPath + ViewBag.LogoName)" height="103" alt="" />
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                        <p></p>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CompanyName, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" })
+                                <span style="color: #F4080C">@Html.ValidationMessageFor(m => m.CompanyName)</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", required = "required", @type = "number" })
+                                <span style="color: #F4080C">@Html.ValidationMessageFor(m => m.PhoneNumber)</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.CustomerID, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                <span style="color: #F4080C">@Html.ValidationMessageFor(m => m.Email)</span>
+                            </div>
                         </div>
-                    </div>
 
+                        @*<div class="form-group">
+                                @Html.LabelFor(m => m.CustomerID, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.CustomerID)
+                                </div>
+                            </div>*@
 
-
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.ContactPerson, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form-control" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ContactPerson, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form-control" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.ContactCellPhone, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.ContactCellPhone, new { @class = "form-control" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ContactCellPhone, new { @class = "col-md-2 control-label", @type = "number" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.ContactCellPhone, new { @class = "form-control" })
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                <span style="color: #F4080C">@Html.ValidationMessageFor(m => m.Password)</span>
+                                <p>Minimum 6 characters, both UPPER and lower case letters, some special characters (eg. !*#%) and some numbers ('0'-'9')</p>
+                            </div>
                         </div>
-                    </div>
+
+
                     <div class="form-group">
                         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
                         <div class="col-md-10">
                             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            <span style="color: #F4080C">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PIN, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.PIN, new { @class = "form-control" })
+                            <span style="color: #F4080C">@Html.ValidationMessageFor(m => m.PIN)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPIN, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.ConfirmPIN, new { @class = "form-control" })
+                            <span style="color: #F4080C">@Html.ValidationMessageFor(m => m.ConfirmPIN)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.TermsAndConditions, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @*<div class="checkbox">*@
+                            @Html.CheckBoxFor(x => x.TermsAndConditions)
+                            @*@Html.LabelFor(x => x.TermsAndConditions)*@
+                            <span style="color: #F4080C">@Html.ValidationMessageFor(x => x.TermsAndConditions)</span>
+                            @Html.Raw(TempData["msg"])
+                            <p>
+                                <a href="@Url.Content("~/Documents/TCS.pdf")" target="_blank">Read Terms and Conditions?</a>
+                            </p>
+                            @*</div>*@
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            @Html.CheckBoxFor(x => x.TermsAndConditions)
+                            @Html.LabelFor(x => x.TermsAndConditions)
+                            @Html.ValidationMessageFor(x => x.TermsAndConditions)
+                        </div>*@
+
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" class="btn btn-default" value="Register" />
                         </div>
                     </div>
-                <td>
-                <td bgcolor="#0A374C"><img src="~/Images/UNYATI_-intro.jpg" width="313" height="228" alt="" /></td>
-            </tr>
+                    <td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.js"></script>
 
-        </tbody>
-    </table>
-}
+    <script>
+        // extend jquery range validator to work for required checkboxes
+        var defaultRangeValidator = $.validator.methods.range;
+        $.validator.methods.range = function (value, element, param) {
+            if (element.type === 'checkbox') {
+                // if it's a checkbox return true if it is checked
+                return element.checked;
+            } else {
+                // otherwise run the default validation function
+                return defaultRangeValidator.call(this, value, element, param);
+            }
+        }
+    </script>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+</body>

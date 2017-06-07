@@ -5,15 +5,15 @@
 }
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="5" />
+    <meta http-equiv="refresh" content=@ViewBag.RefreshTime />
     <title>NWWT Silent Auction</title>
     <style type="text/css">
         body {
-            background-color: #000000;
+            background-color: @ViewBag.BackgroundColor;
         }
 
         body, td, th {
-            color: #FFFFFF;
+            color: @ViewBag.TexColor;
             font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
             font-style: normal;
             font-weight: normal;
@@ -24,23 +24,59 @@
 </head>
 @{int i = 0;}
 
-    <table class="table">
+    <table class="table" border="1">
             @foreach (var item in Model)
             {
-                @Html.HiddenFor(model => item.DateTimeClose)
-                <td bgcolor="#3C3C3C"><img src=@Url.Content(item.PictureName) width="110" height="84" alt="Picture not available" /></td>
+                TimeSpan? difference = DateTime.Now - DateTime.Now;
+                if (item.DateTimeClose != null && item.DateTimeClose > DateTime.Now)
+                {
 
-                <td width="300">
+                    difference = item.DateTimeClose - DateTime.Now;
+                }
+                else
+                {
+                    difference = DateTime.Now - DateTime.Now;
+                }
+                int days = difference.Value.Days;
+                int hours = difference.Value.Hours;
+                int minutes = difference.Value.Minutes;
+                int seconds = difference.Value.Seconds;
+                ViewBag.TimeSpan = "";
+                if (days > 0)
+                {
+                    ViewBag.TimeSpan = days.ToString() + " Days, ";
+                }
+                if (hours > 0)
+                {
+                    ViewBag.TimeSpan = ViewBag.TimeSpan + hours.ToString() + " Hours, ";
+                }
+                ViewBag.TimeSpan = ViewBag.TimeSpan + minutes.ToString() + " Minutes, " + seconds.ToString() + " Seconds";
+
+                @Html.HiddenFor(model => item.DateTimeClose)
+
+                if (item.PictureName == null)
+                {
+                    item.PictureName = "NON.jpg";
+                }
+
+                <td bgcolor=@ViewBag.RollImageBackColor><img src=@Url.Content(@ViewBag.ImagePath + item.PictureName) width="110" height="84" alt="Picture not available" /></td>
+
+                <td width="330">
                     <p style="font-size: 18px; font-weight: bolder; color:  #F4080C">LOT : @Html.DisplayFor(model => item.Lot, new { htmlAttributes = new { @class = "form-control" } })</p>
                     <p style="font-size: 16px; font-weight: bolder;">@Html.DisplayFor(model => item.ltSpecy.Description, new { htmlAttributes = new { @class = "form-control" } })</p>
                     <p style="font-size: 16px; font-weight: bolder;"> CURRENT BID : R <span style="color: #F4080C">@Html.DisplayFor(model => item.BiddingPrice, new { htmlAttributes = new { @class = "form-control" } })</span></p>
+
                     @if(item.DateTimeClose <= DateTime.Now)
                     {
                     <p style="font-size: 16px; font-weight: bolder; color : #F4080C"> BID CLOSED </p>
                     }
+                    else
+                    {
+                       <p style="font-size: 14px; font-weight: bolder; color : #F4080C">Close in:  @ViewBag.TimeSpan</p>
+                    }
                 </td>
                 i++;
-                if (i > 2)
+                if (i > ViewBag.Columns)
                     {
                     <tr></tr>
                     i = 0;

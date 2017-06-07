@@ -16,7 +16,7 @@
     {
         <b>Search By:</b>
         @Html.RadioButton("searchBy", "CompName", true) <text>Company Name</text>
-        @Html.RadioButton("searchBy", "CustomerNum") <text>Customer Number</text>
+        @*@Html.RadioButton("searchBy", "CustomerNum") <text>Customer Number</text>*@
         @Html.RadioButton("searchBy", "eMial") <text>eMail</text>
         @Html.RadioButton("searchBy", "Phone") <text>Cell Phone</text>
         @Html.RadioButton("searchBy", "Contact") <text>Contact Person</text>
@@ -35,9 +35,9 @@
         <th>
             <b>Company Name</b>
         </th>
-        <th>
+        @*<th>
             <b>Customer Number</b>
-        </th>
+        </th>*@
         <th>
             <b>eMail</b>
         </th>
@@ -60,6 +60,7 @@
     <tr>
         <td colspan="4">
             No records match search criteria
+
         </td>
     </tr>
 }
@@ -77,9 +78,9 @@ else
             <td>
                 @Html.DisplayFor(modelItem => item.CompanyName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.CustomerNumber)
-            </td>
+            </td>*@
 
             <td>
                 @Html.DisplayFor(modelItem => item.eMail)

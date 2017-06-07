@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Auctions.Models;
 using System.Data.Entity;
+using Auctions.Controllers;
+using static Auctions.Controllers.ManageController;
 
 namespace Auctions.Controllers
 {
@@ -25,7 +27,7 @@ namespace Auctions.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -37,9 +39,9 @@ namespace Auctions.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -61,6 +63,33 @@ namespace Auctions.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+
+            // FB Added 
+            string aid = "0";
+            int? rollID;
+            if (Session["auctionID"] == null)
+            {
+                rollID = 0;
+            }
+            else
+            {
+                aid = Session["auctionID"].ToString();
+                rollID = Int32.Parse(aid);
+            }
+
+
+            // Find user record for role id.
+
+            BidController bd = new BidController();
+            DefaultSetupModel dm = bd.LoadDefs(rollID); // Get the default values 
+
+
+            ViewBag.BackgroundColor = dm.BackgroundColor;
+            ViewBag.TexColor = dm.FontColor;
+            ViewBag.LogoBackgroundColor = dm.LogoBackgroundColor;
+            ViewBag.LogoPath = dm.LogoPath;
+            ViewBag.LogoName = dm.LogoName;
+
             return View();
         }
 
@@ -76,16 +105,85 @@ namespace Auctions.Controllers
                 return View(model);
             }
 
+            // FB Added 
+            string aid = "0";
+            int? rollID;
+            if (Session["auctionID"] == null)
+            {
+                rollID = 0;
+            }
+            else
+            {
+                aid = Session["auctionID"].ToString();
+                rollID = Int32.Parse(aid);
+            }
+
+
+            // Find user record for role id.
+
+            BidController bd = new BidController();
+            DefaultSetupModel dm = bd.LoadDefs(rollID); // Get the default values 
+
+            ViewBag.BackgroundColor = dm.BackgroundColor;
+            ViewBag.TexColor = dm.FontColor;
+            ViewBag.LogoBackgroundColor = dm.LogoBackgroundColor;
+            ViewBag.LogoPath = dm.LogoPath;
+            ViewBag.LogoName = dm.LogoName;
+
+            // Require the user to have a confirmed email before they can log on.
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user != null)
+            {
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id) && dm.emailConfirmationLoginRequired == true)
+                {
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
+                    ViewBag.errorMessage = "You must have confirmed your email to log on.";
+                    return View("Error");
+                }
+
+                if (!await UserManager.IsPhoneNumberConfirmedAsync(user.Id) && dm.SMSConfirmationLoginRequired == true)
+                {
+                    // Stuur weer boodskap. 
+
+                    ViewBag.errorMessage = "You must confirmed your details before login. Re-send Code";
+                    ViewBag.email = model.Email;
+                    return View("ResentCode");
+                }
+                // Fouche : Adde Active check
+                tblCustomer tblCustomerEx = db.tblCustomers.FirstOrDefault(i => i.CustomerID == model.Email);
+
+                if (tblCustomerEx != null) // Customer bestaan
+                {
+                    if (!tblCustomerEx.Active) // Customer nie aangelog nie. 
+                    {
+                        ViewBag.errorMessage = "Log in not authorised. Please contact NWWT at support@nwwt.co.za";
+
+                        // Stuur email vir NWWT
+                        // email warning to NWWT 
+                        sendEmail sm = new sendEmail();
+                        string EmailSubject = "An attempt to log in was made by a suspended customer";
+                        string EMailBody = $"An attempt to log in was made by a suspended customer. Customer {tblCustomerEx.CompanyName}.";
+                        string res = sm.SendEmailFB("support@nwwt.co.za", EmailSubject, EMailBody, null, null);
+
+
+                        return View("Error");
+                    }
+
+                }
+
+
+            }
+
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-
-//            var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
 
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -96,6 +194,9 @@ namespace Auctions.Controllers
                     return View(model);
             }
         }
+
+
+
 
         //
         // GET: /Account/VerifyCode
@@ -126,7 +227,7 @@ namespace Auctions.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -145,6 +246,31 @@ namespace Auctions.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            // FB Added 
+            string aid = "0";
+            int? rollID;
+            if (Session["auctionID"] == null)
+            {
+                rollID = 0;
+            }
+            else
+            {
+                aid = Session["auctionID"].ToString();
+                rollID = Int32.Parse(aid);
+            }
+
+
+            // Find Auction record for role roll id.
+
+            BidController bd = new BidController();
+            DefaultSetupModel dm = bd.LoadDefs(rollID); // Get the default values 
+
+            ViewBag.BackgroundColor = dm.BackgroundColor;
+            ViewBag.TexColor = dm.FontColor;
+            ViewBag.LogoBackgroundColor = dm.LogoBackgroundColor;
+            ViewBag.LogoPath = dm.LogoPath;
+            ViewBag.LogoName = dm.LogoName;
+
             return View();
         }
 
@@ -156,26 +282,49 @@ namespace Auctions.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
 
+            // FB Added 
+            string aid = "0";
+            int? rollID;
+            if (Session["auctionID"] == null)
+            {
+                rollID = 0;
+            }
+            else
+            {
+                aid = Session["auctionID"].ToString();
+                rollID = Int32.Parse(aid);
+            }
+
+            BidController bd = new BidController();
+            DefaultSetupModel dm = bd.LoadDefs(rollID); // Get the default values 
+
+            ViewBag.BackgroundColor = dm.BackgroundColor;
+            ViewBag.TexColor = dm.FontColor;
+            ViewBag.LogoBackgroundColor = dm.LogoBackgroundColor;
+            ViewBag.LogoPath = dm.LogoPath;
+            ViewBag.LogoName = dm.LogoName;
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {CompanyName = model.CompanyName,  PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email, CustomerID = model.CustomerID, ContactPerson = model.ContactPerson, ContactCellPhone = model.ContactCellPhone };
+                var user = new ApplicationUser { CompanyName = model.CompanyName, PhoneNumber = model.PhoneNumber, UserName = model.Email, Email = model.Email, CustomerID = model.CustomerID, ContactPerson = model.ContactPerson, ContactCellPhone = model.ContactCellPhone, PIN = model.PIN };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                // User is created in Accounts table
+
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, model.CompanyName));
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-
+                    // FB added this
+                    // User is successfully created in Accounts table. 
+                    // Create Customer record with Basic info al is die inligting nie bevestig deur email of sms
+                    //
 
                     tblCustomer tblCustomers = new tblCustomer();
                     tblCustomer tblCustomerEx = db.tblCustomers.FirstOrDefault(i => i.CustomerID == model.Email);
+                    string companyName;
+                    string Email;
 
-                    if (tblCustomerEx == null)
+                    if (tblCustomerEx == null)  // voeg by
                     {
                         tblCustomers.CustomerID = model.Email; // Kan dalk later verander.  
                         tblCustomers.CompanyName = model.CompanyName;
@@ -186,12 +335,15 @@ namespace Auctions.Controllers
                         tblCustomers.CellPhone = model.ContactCellPhone;
                         tblCustomers.Active = true;
                         tblCustomers.VATRegistered = false;
+                        tblCustomers.PIN = model.PIN;
+                        companyName = model.CompanyName;
+                        Email = model.Email;
 
                         db.tblCustomers.Add(tblCustomers);
                         db.SaveChanges();
                     }
-                   else
-                   {
+                    else
+                    {
                         tblCustomer tblCustomersF = db.tblCustomers.FirstOrDefault(i => i.CustomerID == model.Email);
                         db.Entry(tblCustomersF).State = EntityState.Modified;
                         tblCustomersF.CompanyName = model.CompanyName;
@@ -202,19 +354,254 @@ namespace Auctions.Controllers
                         tblCustomersF.CellPhone = model.ContactCellPhone;
                         tblCustomersF.Active = true;
                         tblCustomersF.VATRegistered = false;
+                        tblCustomersF.PIN = model.PIN;
+                        companyName = model.CompanyName;
+                        Email = model.Email;
 
                         db.SaveChanges();
-                   }
+                    }
 
+                    BidController loadDefs = new BidController();
+                    DefaultSetupModel dms = loadDefs.LoadDefs(0); // Get the default values 
+                    bool confirmation = false;
+                    // Stuur confirmation email as nodig
+                    if (dms.emailConfirmRegistration == true)
+                    {
+                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+                        ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                        + "before you can log in.";
+                        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        confirmation = true;
 
+                    }
+                    if (dms.SMSAllFunctionality == true && dms.SMSCustRegistration == true)
+                    {
+                        // Generate OTP
+                        var smscode = await UserManager.GenerateChangePhoneNumberTokenAsync(user.Id, model.PhoneNumber);
+                        // FB added
+                        smsMGT smg = new smsMGT();
+                        string messagestring = "Your security code for Silent Auction is: " + smscode;
+                        var res = smg.SendSingleSMS("1", model.PhoneNumber, messagestring);
 
-                    return RedirectToAction("Index", "Home");
+                        if (res != "success")
+                        {
+                            string EmailSubject = "OTP SMS NOT sent successfully";
+                            string EMailBody = $"OTP SMS NOT sent successfully to new customer {model.CompanyName}" + ".  Error = " + res + " Number " + model.PhoneNumber;
+                            sendEmail sm = new sendEmail();
+                            string emalres = sm.SendEmailFB("support@nwwt.co.za", EmailSubject, EMailBody, null, null);
+                            ViewBag.errorMessage = "Cell Phone number not correct. Log in and provide correct number or contact NWWT at support@nwwt.co.za";
+                            return View("Error");
+                            /// FB
+                        }
+                        confirmation = true;
+                        return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.PhoneNumber, id = user.Id, email = Email, compName = companyName });
+                    }
+                    if (!confirmation)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        //
+        [AllowAnonymous]
+        public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber, string id, string EMAIL, string compName)
+        {
+            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(id, phoneNumber);
+
+            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber, userID = id, email = EMAIL, CompanyName = compName });
+        }
+
+        //
+        // POST: /Manage/VerifyPhoneNumber
+        [HttpPost]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePhoneNumberAsync(model.userID, model.PhoneNumber, model.Code);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(model.userID);
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                sendEmail sm = new sendEmail();
+                string EmailSubject = "FICA requirements for NWWT Silent Auctions";
+                string EMailBody = $"Thank you {model.CompanyName} for registering for NWWT Silent Auctions.\r\n\r\n Please email a copy of the responsible person’s ID, Company registration certificate (if applicable), proof of address and VAT certificate (if applicable), within 7 days to avoid deregistration, to: accounts@nwwt.co.za \r\n \r\n Thank you for your support. \r\n\r\n Kind regards \r\n\r\n \r\n\r\n \r\n\r\n NWWT Silent Auctions Team";
+                string res = sm.SendEmailFB(model.email, EmailSubject, EMailBody, "support@nwwt.co.za", null);
+
+                return RedirectToAction("Index", "Home", new { Message = "Cell Phone successfully verified" });
+            }
+            // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "Failed to verify phone");
+            return View(model);
+        }
+        // Fouche Verify Passsword change from SMS OTP
+        //
+        [AllowAnonymous]
+        public async Task<ActionResult> VerifyPhoneNumberPasswordChange(string phoneNumber, string id)
+        {
+            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(id, phoneNumber);
+
+            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber, userID = id });
+        }
+
+        //
+        // POST: /Manage/VerifyPhoneNumber
+        [HttpPost]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public async Task<ActionResult> VerifyPhoneNumberPasswordChange(VerifyPhoneNumberViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePhoneNumberAsync(model.userID, model.PhoneNumber, model.Code);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(model.userID);
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                // Fouche  
+
+                return RedirectToAction("ResetPasswordSMS", "Account");
+            }
+            // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "Failed to verify phone");
+            return View(model);
+        }
+        // 
+
+        //  FB
+        //
+
+
+        // FB Admin Conirme Cell 
+
+        [AllowAnonymous]
+        //        public async Task<ActionResult> AdminConfirmCell(string phoneNumber, string id)
+        public ActionResult AdminConfirmCell(string phoneNumber, string id)
+        {
+
+            ViewBag.ResultMessage = "";
+
+            return View();
+        }
+
+        //
+        // POST: /Manage/VerifyPhoneNumber
+        [HttpPost]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminConfirmCell(AdminConfirmCell model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = UserManager.FindByName(model.email);
+            if(user == null)
+            {
+
+                ViewBag.ResultMessage = "User with Email address not found!";
+                return View(model);
+            }
+            model.userID = user.Id;
+            model.Code = await UserManager.GenerateChangePhoneNumberTokenAsync(model.userID, model.PhoneNumber);
+
+            var result = await UserManager.ChangePhoneNumberAsync(model.userID, model.PhoneNumber, model.Code);
+
+
+            if (result.Succeeded)
+            {
+
+                ViewBag.ResultMessage = "Cell number successfully confirmed!";
+
+                return View(model);
+            }
+            // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "Failed to verify phone");
+            return View(model);
+        }
+
+
+        // FB end Admin confirm cell
+
+
+        // GET: /Manage/AddPhoneNumber
+        [AllowAnonymous]
+        public ActionResult AddPhoneNumber(string email)
+        {
+            ResentCodeModel resentCodeModel = new ResentCodeModel();
+            resentCodeModel.email = email;
+            return View(resentCodeModel);
+        }
+
+        //
+        // POST: /Manage/AddPhoneNumber
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<ActionResult> AddPhoneNumber(ResentCodeModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await UserManager.FindByNameAsync(model.email);
+            if (user != null)
+            {
+                model.userID = user.Id;
+            }
+            // Generate the token and send it
+
+            //              var code = await UserManager.GenerateChangePhoneNumberTokenAsync(model.userID, model.PhoneNumber);
+            bool smsNotifications = true;
+            if (smsNotifications)
+            {
+                var smscode = await UserManager.GenerateChangePhoneNumberTokenAsync(user.Id, model.PhoneNumber);
+                // FB added
+                smsMGT smg = new smsMGT();
+                string messagestring = "Your security code for Silent Auction is: " + smscode;
+                var res = smg.SendSingleSMS("1", model.PhoneNumber, messagestring);
+                if (res != "success")
+                {
+                    string EmailSubject = "OTP SMS NOT sent successfully";
+                    string EMailBody = $"OTP SMS NOT sent successfully to customer {user.CompanyName}" + " to change phone " + ".  Error = " + res;
+                    sendEmail sm = new sendEmail();
+                    string emalres = sm.SendEmailFB("support@nwwt.co.za", EmailSubject, EMailBody, null, null);
+                    ViewBag.errorMessage = "Cell Phone number not correct. Log in and provide correct number or contact NWWT at support@nwwt.co.za";
+                    return View("Error");
+                }
+
+            }
+
+            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.PhoneNumber, id = user.Id });
+        }
+
+
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult ConfirmOTP()
+        {
+            return View();
+
         }
 
         //
@@ -245,25 +632,93 @@ namespace Auctions.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
+            BidController loadDefs = new BidController();
+            DefaultSetupModel dms = loadDefs.LoadDefs(0); // Get the default values 
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                if (user == null)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    ViewBag.errorMessage = "Email address provided is not registered. Please use correct email address or register as user";
+                    return View("Error");
+                }
+
+                if (dms.emailConfirmationLoginRequired == true)
+                {
+                    if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                    {
+                        // Don't reveal that the user does not exist or is not confirmed
+                        // return View("ForgotPasswordConfirmation"); // Moet error gee. 
+                        ViewBag.errorMessage = "Email address not confirmed";
+                        return View("Error");
+                    }
+                }
+                if (dms.SMSConfirmationLoginRequired == true)
+                {
+                    if (user == null || !(await UserManager.IsPhoneNumberConfirmedAsync(user.Id)))
+                    {
+                        // Don't reveal that the user does not exist or is not confirmed
+                        //                        return View("ForgotPasswordConfirmation"); // Moet error gee. 
+                        ViewBag.errorMessage = "Cell Phone number not confirmed";
+                        return View("Error");
+
+                    }
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
-            }
 
+                //string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                // Fouche
+                bool confirmation = false;
+                // Stuur confirmation email as nodig
+                if (dms.emailConfirmRegistration == true)
+                {
+                    string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                    //                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+                    var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                    + "before you can log in.";
+                    confirmation = true;
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                }
+                if (dms.SMSAllFunctionality == true && dms.SMSCustRegistration == true)
+                {
+                    // Generate OTP
+                    var smscode = await UserManager.GenerateChangePhoneNumberTokenAsync(user.Id, user.PhoneNumber);
+                    // FB added
+                    smsMGT smg = new smsMGT();
+                    string messagestring = "Your security code for Silent Auction is: " + smscode;
+                    var res = smg.SendSingleSMS("1", user.PhoneNumber, messagestring);
+                    if (res != "success")
+                    {
+                        string EmailSubject = "OTP SMS NOT sent successfully";
+                        string EMailBody = $"OTP SMS NOT sent successfully to customer {user.CompanyName}" + " Forgot Password " + ".  Error = " + res;
+                        sendEmail sm = new sendEmail();
+                        string emalres = sm.SendEmailFB("support@nwwt.co.za", EmailSubject, EMailBody, null, null);
+                        ViewBag.errorMessage = "Cell Phone number not correct. Log in and provide correct number or contact NWWT at support@nwwt.co.za";
+                        return View("Error");
+
+                    }
+
+
+                    //
+                    confirmation = true;
+                    return RedirectToAction("VerifyPhoneNumberPasswordChange", new { PhoneNumber = user.PhoneNumber, id = user.Id });
+                }
+                if (!confirmation)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                }
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+            }
             // If we got this far, something failed, redisplay form
             return View(model);
+
         }
 
         //
@@ -297,7 +752,11 @@ namespace Auctions.Controllers
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                ViewBag.errorMessage = "Email address provided is not registered on system";
+                return View("Error");
+
+                //                return RedirectToAction("ResetPasswordConfirmation", "Account");
+
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
@@ -307,6 +766,44 @@ namespace Auctions.Controllers
             AddErrors(result);
             return View();
         }
+
+        // Fouche - rsete password from SMS
+        //
+        // GET: /Account/ResetPassword
+        [AllowAnonymous]
+        public ActionResult ResetPasswordSMS()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPasswordSMS(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                //               return RedirectToAction("ResetPasswordConfirmation", "Account"); // Error view
+                ViewBag.errorMessage = "Email address provided is not registered on system";
+                return View("Error");
+
+            }
+            // Fouche code vir reset. 
+
+            //            return RedirectToAction("ResetPasswordConfirmation", "Account");
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
 
         //
         // GET: /Account/ResetPasswordConfirmation
@@ -525,6 +1022,17 @@ namespace Auctions.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+        private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject)
+        {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+               new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userID, subject,
+               "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+            return callbackUrl;
+        }
         #endregion
     }
+
 }

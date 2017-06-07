@@ -1,0 +1,243 @@
+﻿@model IEnumerable<Auctions.Models.tblRoll>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RollId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpeciesCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TagNr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateMeasured)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HornLength)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipToTip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OtherInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAvailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Male)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Female)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Young)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity_Lot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SellerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuyerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BiddingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidTotalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewBidPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewBidder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnAuction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateLoaded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateSold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PicturePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PictureName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Increments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReservePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LotQ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTimeBid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTimeClose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidOpen)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RollId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lot)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpeciesCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TagNr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateMeasured)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HornLength)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipToTip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OtherInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAvailable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Male)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Female)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Young)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity_Lot)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SellerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuyerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BiddingPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BidDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BidTotalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewBidPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewBidder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Picture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnAuction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateLoaded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateSold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PicturePath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PictureName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Increments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReservePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LotQ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTimeBid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTimeClose)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BidOpen)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

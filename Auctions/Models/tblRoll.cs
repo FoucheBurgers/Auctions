@@ -56,6 +56,8 @@ namespace Auctions.Models
         public Nullable<System.DateTime> DateTimeBid { get; set; }
         public Nullable<System.DateTime> DateTimeClose { get; set; }
         public string CustomerNumber { get; set; }
+        public Nullable<bool> BidOpen { get; set; }
+        public string AuctionBuyerNo { get; set; }
     
         public virtual ltRollDescription ltRollDescription { get; set; }
         public virtual ltRollDescription ltRollDescription1 { get; set; }

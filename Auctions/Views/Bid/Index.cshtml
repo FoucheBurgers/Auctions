@@ -5,15 +5,15 @@
 }
 <head>
     <meta charset="UTF-8">
-    @*<meta http-equiv="refresh" content="5" />*@
+    <meta http-equiv="refresh" content=@ViewBag.RefreshTime />
     <title>NWWT Silent Auction</title>
     <style type="text/css">
         body {
-            background-color: #000000;
+             background-color: @ViewBag.RollImageBackColor;
         }
 
         body, td, th {
-            color: #FFFFFF;
+            color: @ViewBag.TexColor;
             font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
             font-style: normal;
             font-weight: normal;
@@ -22,60 +22,95 @@
         }
     </style>
 </head>
-@section Scripts{
-@*<script type="text/javascript">
-    $(function() {
-        setInterval(loadTable,5000);  // invoke load every second
-        loadTable(); //    load on initial page loaded
-    });
 
-    function loadTable() {
-        $('#thegrid').load( '/bid/index' );
-    }
-</script>*@
-}
+@*@section Scripts{
+    <script type="text/javascript">
+        $(function() {
+            setInterval(loadTable,5000);  // invoke load every second
+            loadTable(); //    load on initial page loaded
+        });
+
+        function loadTable() {
+            $('#thegrid').load( '/bid/index' );
+        }
+    </script>
+    }*@
+
+
+@*@ViewBag.TimeSpan*@
+
 <div id="thegrid">
     <table class="table">
 
-        @foreach (var item in Model)
+
+        @if (Model.Count() == 0)
         {
-
-            <tr style="text-align: left; font-size: 18pt" ;>
-                <td bgcolor="#3C3C3C"><img src=@Url.Content(item.PictureName) width="504" height="381" alt="Picture not available" /></td>
-
-                <td width="600">
-
-                    <p style="font-size: 18px; font-weight: bolder; color:  #F4080C">LOT : @Html.DisplayFor(model => item.Lot, new { htmlAttributes = new { @class = "form-control" } })</p>
-
-
-                    <p style="font-size: 16px; font-weight: bolder;">@Html.DisplayFor(model => item.ltSpecy.Description, new { htmlAttributes = new { @class = "form-control" } })</p>
-
-
-                    <p style="font-size: 16px">Age/DOB : @Html.DisplayFor(model => item.Age, new { htmlAttributes = new { @class = "form-control" } })</p>
-
-
-                    <p>Horn Length : @Html.DisplayFor(model => item.HornLength, new { htmlAttributes = new { @class = "form-control" } })</p>
-
-
-                    <p>Tip to Tip : @Html.DisplayFor(model => item.TipToTip, new { htmlAttributes = new { @class = "form-control" } })</p>
-                    <p>
-                        Male : @Html.DisplayFor(model => item.Male, new { htmlAttributes = new { @class = "form-control" } })
-                        , Female : @Html.DisplayFor(model => item.Female, new { htmlAttributes = new { @class = "form-control" } })
-                        , Young : @Html.DisplayFor(model => item.Young, new { htmlAttributes = new { @class = "form-control" } })
-                        , Total : @Html.DisplayFor(model => item.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-
-                    </p>
-
-                    <p>CURRENT BID : R <span style="color: #F4080C">@Html.DisplayFor(model => item.BiddingPrice, new { htmlAttributes = new { @class = "form-control" } })</span></p>
-
-                    <p>@Html.ActionLink("Place your bid", "Bid", new { id = item.ID })</p>
+            <tr>
+                <td colspan="4">
+                    @*Roll not loaded yet. Roll will be available soon!*@
+                    <p></p>
+                    <p></p>
+                    @ViewBag.emptyMessage
+                    <p></p>
+                    <p></p>
+                    @Html.ActionLink("See Auction List", "Index", "Home")
+                    <p></p>
 
                 </td>
             </tr>
-
         }
+        else
+        {
+            foreach (var item in Model)
+            {
 
+                if (item.PictureName == null)
+                {
+                    item.PictureName = "NON.jpg";
+                }
+
+                //DateTime startTime = DateTime.Now;
+                //DateTime endTime = item.DateTimeClose;
+                //ViewBag.TimeSpan = endTime.Subtract(startTime);
+                TimeSpan? difference = DateTime.Now - DateTime.Now;
+                if (item.DateTimeClose != null && item.DateTimeClose > DateTime.Now)
+                {
+
+                    difference = item.DateTimeClose - DateTime.Now;
+                }
+                else
+                {
+                    difference = DateTime.Now - DateTime.Now;
+                }
+                int days = difference.Value.Days;
+                int hours = difference.Value.Hours;
+                int minutes = difference.Value.Minutes;
+                int seconds = difference.Value.Seconds;
+                ViewBag.TimeSpan = "";
+                if (days > 0)
+                {
+                    ViewBag.TimeSpan = days.ToString() + " Days, ";
+                }
+                if (hours > 0)
+                {
+                    ViewBag.TimeSpan = ViewBag.TimeSpan + hours.ToString() + " Hours, ";
+                }
+                ViewBag.TimeSpan = ViewBag.TimeSpan + minutes.ToString() + " Minutes, " + seconds.ToString() + " Seconds";
+
+                <tr style="text-align: left; font-size: 18pt" ;>
+                    <td bgcolor=@ViewBag.RollImageBackColor><img src=@Url.Content(@ViewBag.ImagePath + item.PictureName) width="300" height="228" alt="Picture not available" /></td>
+                    <td>
+                        @*van hier*@
+
+                        @Html.Partial("_BidIndex", item)
+
+                        @*tot hier*@
+
+                    </td>
+                </tr>
+                <tr></tr>
+
+            }
+        }
     </table>
-
 </div>
-

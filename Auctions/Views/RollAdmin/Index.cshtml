@@ -7,11 +7,24 @@
 
 <h2>Index</h2>
 
+@using (@Html.BeginForm("Index", "RollAdmin", FormMethod.Get))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DropDownList("AuctionID", null, "Select Auction", htmlAttributes: new { onchange = "this.form.submit();" })
+            </th>
+        </tr>
+    </table>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+
 <table class="table">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.ltRollDescription.Description)
         </th>
@@ -40,9 +53,13 @@
         <th></th>
     </tr>
 
+    @{int i = 1; }
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @(i++)
+            </td>
 
             <td>
                 @Html.DisplayFor(modelItem => item.ltRollDescription1.Description)

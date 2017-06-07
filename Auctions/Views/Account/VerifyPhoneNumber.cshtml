@@ -1,0 +1,43 @@
+﻿@model Auctions.Models.VerifyPhoneNumberViewModel
+@{
+    ViewBag.Title = "Verify Phone Number";
+}
+
+<h2>Please verify your details. SMS with an OTP code has been send to your number</h2>
+
+@using (Html.BeginForm("VerifyPhoneNumber", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @*@Html.AntiForgeryToken()*@
+    @Html.Hidden("phoneNumber", @Model.PhoneNumber)
+    @Html.Hidden("userID", @Model.userID)
+    //    @Html.Hidden("userID", @Model.userID)
+    @Html.HiddenFor(model => Model.email);
+    @Html.HiddenFor(model => Model.CompanyName);
+
+
+    <h4>Enter verification code</h4>
+    <h5>@ViewBag.Status</h5>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Submit" />
+        </div>
+    </div>
+    <p></p>
+    <p></p>
+    <h4>NOTE:</h4>
+    <h4>If you do not received your code or if the code expired, please Log In and re-send the code.</h4>
+    <h4>You will receive an Email with FICA requirements if not already confirmed. Please respond to this eMail within 7 days to avoid deregistration.</h4>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

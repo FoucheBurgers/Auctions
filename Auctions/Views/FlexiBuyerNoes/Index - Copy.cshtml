@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Auctions.Models.FlexiBuyerNo>
+
+@{
+    ViewBag.Title = "Load FlexiAuction Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Load FlexiAuction Information</h2>
+
+@using (Html.BeginForm())
+{
+    @*@Html.HiddenFor(model => model.)*@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DropDownList("AuctionID", null, "Select Auction")
+                @*@Html.DropDownList("AuctionID", ViewBag.AuctionID, "Select Auction", new { onchange = "this.form.submit();" })*@
+
+            </th>
+            <th>
+                Lot
+            </th>
+        </tr>
+    </table>
+    <p>
+        @*@Html.ActionLink("Load Data", "Load")*@
+        @Html.ActionLink("Load Data", "Load")
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.Raw(TempData["msg"])
+            @Html.DisplayNameFor(model => model.BSNR)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CUST_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VATNR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QFIND)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CEL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BSNR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CUST_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VATNR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QFIND)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CEL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMAIL)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idKey })
+                @*@Html.ActionLink("Details", "Details", new { id=item.idKey }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.idKey })*@
+            </td>
+        </tr>
+    }
+
+</table>

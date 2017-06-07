@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Silent Auctions</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -23,30 +23,59 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Bidding", "Index", "Bid")</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage")</li>
+
                     @if (User.IsInRole("Administrator"))
                     {
                         <li class="reports">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Auction Roll Admin<span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Auction Admin", "Index", "AuctionsAdmin")</li>
                                 <li>@Html.ActionLink("Auction Roll Admin", "Index", "RollAdmin")</li>
-                                <li>@Html.ActionLink("Roll Display", "Index", "RollDisplay")</li>
-                                <li>@Html.ActionLink("Admin bidding", "Index", "AdminBid")</li>
+                                <li>@Html.ActionLink("Auction Roll Display (TV)", "Index", "AuctionRollDisplay")</li>
                             </ul>
                         </li>
+                    }
+
+
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Auction Admin"))
+                    {
+                        <li class="reports">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bidding Admin<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Admin bidding", "Index", "AdminBid")</li>
+                                <li>@Html.ActionLink("Buyer Number Admin", "Index", "BuyerNumber")</li>
+                                <li>@Html.ActionLink("Bid History", "Index", "BidHistories")</li>
+                                <li>@Html.ActionLink("Send SMS", "Index", "smsSend")</li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("Administrator"))
+                    {
+
                         <li class="reports">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customers Admin<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Customers Admin", "Index", "Customers")</li>
-                                <li>@Html.ActionLink("Customers Number Admin", "Index", "CustomersNumber")</li>
                             </ul>
                         </li>
 
+                        @*<li>@Html.ActionLink("System Admin", "Index", "Home")</li>*@
 
-                        <li>@Html.ActionLink("System Admin", "Index", "Home")</li>
+                        <li class="reports">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">System Admin<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Default settings", "Index", "DefaultSetups")</li>
+                                <li>@Html.ActionLink("Species Admin", "Index", "SpeciesAdmin")</li>
+                                <li>@Html.ActionLink("Customer Access Control", "Index", "UserAdminCustomers")</li>
+                                <li>@Html.ActionLink("Load FlexiAuction Buyers", "Index", "FlexiBuyerNoes")</li>
+                                <li>@Html.ActionLink("User Roles Admin", "Index", "UserAdminRoles")</li>
+                                <li>@Html.ActionLink("Update and Confirm Cell Numbers", "AdminConfirmCell", "Account")</li>
+                                <li>@Html.ActionLink("SMS balance", "Index", "smsStatus")</li>
+                            </ul>
+                        </li>
                     }
-
-
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -56,7 +85,17 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - BMC</p>
+            <table width="430" align="center" cellpadding="6" cellspacing="3">
+                <tr>
+                    <td width="130"><a href="@Url.Content("~/Documents/NWWT_privacy_policy.pdf")" target="_blank">Privacy policy</a></tdwidth="200">
+                    <td>&copy; @DateTime.Now.Year - BMC</td>
+                    <td><a href="@Url.Content("~/Documents/TCS.pdf")" target="_blank">Terms and Conditions</a></td>
+                </tr>
+            </table>
+            @*<p>
+                    &copy; @DateTime.Now.Year - BMC
+                    <a href="@Url.Content("~/Documents/TCS.pdf")" target="_blank">Terms and Conditions</a>
+                </p>*@
         </footer>
     </div>
 

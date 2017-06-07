@@ -1,0 +1,64 @@
+﻿@model Auctions.Models.tblRoll
+
+@{
+    ViewBag.Title = "Edit";
+}
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.BiddingPrice)
+    @Html.HiddenFor(model => model.Increments)
+    @Html.HiddenFor(model => model.Quantity)
+    @Html.HiddenFor(model => Model.ltSpecy.Description)
+    @Html.HiddenFor(model => Model.DateTimeBid)
+    @Html.HiddenFor(model => Model.DateTimeClose)
+    @Html.HiddenFor(model => Model.RollId)
+    @Html.HiddenFor(model => Model.Lot)
+    @Html.HiddenFor(model => Model.SellerId)
+    @Html.HiddenFor(model => Model.BuyerId)
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <title>Silent Auction</title>
+
+        <style type="text/css">
+            body {
+                background-color: @ViewBag.RollImageBackColor;
+            }
+
+            body, td, th {
+                color: @ViewBag.TexColor;
+                font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 10px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <table width="400" border="1" align="center" cellpadding="6">
+            <tbody>
+                <tr>
+                    <td rowspan="1" bgcolor=@ViewBag.RollImageBackColor><img src="@Url.Content(@ViewBag.ImagePath+Model.PictureName)" width="200" height="152" alt="IMAGES" /></td>
+                </tr>
+
+                @Html.Partial("_Bid", Model)
+                @Html.Raw(TempData["msg"])
+                <tr>
+                    <td bgcolor=@ViewBag.LogoBackgroundColor><img src=@Url.Content(@ViewBag.LogoPath+ @ViewBag.LogoName) width="200" height="152" alt="Picture not available" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+}
+
+<div>
+    <p style="font-size: 24px">@Html.ActionLink("Back to List", "Index")</p>
+</div>

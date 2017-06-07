@@ -3,12 +3,12 @@
 
 <style type="text/css">
     body {
-        background-color: #000000;
+        background-color: @ViewBag.BackgroundColor;
     }
 
     body, td, th {
-        color: #FFFFFF;
-        background-color :#0a374c; 
+        color: @ViewBag.TexColor;
+        background-color: @ViewBag.BackgroundColor;
         font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-style: normal;
         font-weight: normal;
@@ -29,10 +29,13 @@
             {
                 @Html.AntiForgeryToken()
 
-                <table width="1000" align="center" cellpadding="6" cellspacing="3">
+                <table width="400" align="center" cellpadding="6" cellspacing="3">
                     <tbody>
                         <tr>
                             <td>
+
+                                <img src="@Url.Content(ViewBag.LogoPath+ViewBag.LogoName)" height="103" alt="" />
+
                                 <hr />
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="form-group">
@@ -65,27 +68,24 @@
                                 <p>
                                     @Html.ActionLink("Register as a new user", "Register")
                                 </p>
-                                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                                @*Enable this once you have account confirmation enabled for password reset functionality*@
+                                <p>
+                                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                                </p>
                             <td>
-                            <td bgcolor="#0A374C"><img src="~/Images/UNYATI_-intro.jpg" width="413" height="328" alt="" /></td>
                         </tr>
-
                     </tbody>
                 </table>
-
             }
         </section>
 
     </div>
 
     @*<div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>*@
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>*@
 
 </div>
 

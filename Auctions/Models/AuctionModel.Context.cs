@@ -29,10 +29,12 @@ namespace Auctions.Models
     
         public virtual DbSet<ltRollDescription> ltRollDescriptions { get; set; }
         public virtual DbSet<ltSpecy> ltSpecies { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblCustomer> tblCustomers { get; set; }
         public virtual DbSet<tblRoll> tblRolls { get; set; }
         public virtual DbSet<BidHistory> BidHistories { get; set; }
+        public virtual DbSet<BuyerNo> BuyerNoes { get; set; }
+        public virtual DbSet<FlexiBuyerNo> FlexiBuyerNoes { get; set; }
+        public virtual DbSet<DefaultSetup> DefaultSetups { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -137,7 +139,7 @@ namespace Auctions.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual int UpdateBidder(Nullable<int> iD, Nullable<int> buyerId, Nullable<decimal> biddingPrice, Nullable<decimal> bidTotalPrice, Nullable<System.DateTime> dateTimeBid)
+        public virtual int UpdateBidder(Nullable<int> iD, Nullable<int> buyerId, Nullable<decimal> biddingPrice, Nullable<decimal> bidTotalPrice, Nullable<System.DateTime> dateTimeBid, string auctionBuyerNumber)
         {
             var iDParameter = iD.HasValue ?
                 new ObjectParameter("ID", iD) :
@@ -159,7 +161,11 @@ namespace Auctions.Models
                 new ObjectParameter("DateTimeBid", dateTimeBid) :
                 new ObjectParameter("DateTimeBid", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateBidder", iDParameter, buyerIdParameter, biddingPriceParameter, bidTotalPriceParameter, dateTimeBidParameter);
+            var auctionBuyerNumberParameter = auctionBuyerNumber != null ?
+                new ObjectParameter("AuctionBuyerNumber", auctionBuyerNumber) :
+                new ObjectParameter("AuctionBuyerNumber", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateBidder", iDParameter, buyerIdParameter, biddingPriceParameter, bidTotalPriceParameter, dateTimeBidParameter, auctionBuyerNumberParameter);
         }
     
         public virtual int UpdateRoll(Nullable<int> iD, string roleID, string lot, string item, string tagNr, string age, string dateMeasured, string hornLength, string tipToTip, string otherInfo, string dateAvailable, Nullable<int> male, Nullable<int> female, Nullable<int> young, Nullable<float> quantity, string quantity_Lot, string seller, string bidder, Nullable<float> biddingPrice, Nullable<System.DateTime> bidDateTime, Nullable<float> bidTotalPrice, Nullable<float> newBidPrice, string newBidder, Nullable<bool> onAuction, Nullable<bool> sold, Nullable<System.DateTime> dateLoaded, Nullable<System.DateTime> dateSold, string pictureName, Nullable<float> increments, Nullable<float> reservePrice)
@@ -397,6 +403,94 @@ namespace Auctions.Models
                 new ObjectParameter("Phone", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddCustomerNum", companyNameParameter, customerNumberParameter, contactPersonParameter, eMailParameter, cellPhoneParameter, phoneParameter);
+        }
+    
+        public virtual int AddCustomerFlex(string customerID, string companyName, string contactPerson, string eMail, string cellPhone, string phone, string vATNr, Nullable<bool> vATRegistered, Nullable<bool> active)
+        {
+            var customerIDParameter = customerID != null ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(string));
+    
+            var companyNameParameter = companyName != null ?
+                new ObjectParameter("CompanyName", companyName) :
+                new ObjectParameter("CompanyName", typeof(string));
+    
+            var contactPersonParameter = contactPerson != null ?
+                new ObjectParameter("ContactPerson", contactPerson) :
+                new ObjectParameter("ContactPerson", typeof(string));
+    
+            var eMailParameter = eMail != null ?
+                new ObjectParameter("eMail", eMail) :
+                new ObjectParameter("eMail", typeof(string));
+    
+            var cellPhoneParameter = cellPhone != null ?
+                new ObjectParameter("CellPhone", cellPhone) :
+                new ObjectParameter("CellPhone", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var vATNrParameter = vATNr != null ?
+                new ObjectParameter("VATNr", vATNr) :
+                new ObjectParameter("VATNr", typeof(string));
+    
+            var vATRegisteredParameter = vATRegistered.HasValue ?
+                new ObjectParameter("VATRegistered", vATRegistered) :
+                new ObjectParameter("VATRegistered", typeof(bool));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddCustomerFlex", customerIDParameter, companyNameParameter, contactPersonParameter, eMailParameter, cellPhoneParameter, phoneParameter, vATNrParameter, vATRegisteredParameter, activeParameter);
+        }
+    
+        public virtual int AddCustomerFlexTest(string customerID)
+        {
+            var customerIDParameter = customerID != null ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddCustomerFlexTest", customerIDParameter);
+        }
+    
+        public virtual int UserAdminCustomer(Nullable<int> iD, string phone, string pIN, Nullable<bool> fICA, Nullable<bool> active)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var pINParameter = pIN != null ?
+                new ObjectParameter("PIN", pIN) :
+                new ObjectParameter("PIN", typeof(string));
+    
+            var fICAParameter = fICA.HasValue ?
+                new ObjectParameter("FICA", fICA) :
+                new ObjectParameter("FICA", typeof(bool));
+    
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UserAdminCustomer", iDParameter, phoneParameter, pINParameter, fICAParameter, activeParameter);
+        }
+    
+        public virtual int CustomersPIN(Nullable<int> iD, string pIN)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var pINParameter = pIN != null ?
+                new ObjectParameter("PIN", pIN) :
+                new ObjectParameter("PIN", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CustomersPIN", iDParameter, pINParameter);
         }
     }
 }

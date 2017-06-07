@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Auctions.Models.tblCustomer>
+
+@{
+    ViewBag.Title = "Customer Access Control";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer Admin</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            Name
+        </th>
+        <th>
+            Contact Person
+        </th>
+        <th>
+            Active
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.FICA)
+        </th>*@
+        <th>
+            Date Registered
+        </th>
+        <th></th>
+    </tr>
+@{int i = 1; }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @(i++)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactPerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.FICA)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.DateLoaded)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID })
+            @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+        </td>
+    </tr>
+}
+
+</table>

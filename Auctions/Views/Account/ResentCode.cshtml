@@ -1,0 +1,15 @@
+﻿@using Auctions.Models
+@model LoginViewModel
+
+
+@{
+    ViewBag.Title = "Confirm registration";
+}
+
+<h1 class="text-danger">Please confirm registration</h1>
+@*@Html.HiddenFor(ViewBag.email)*@
+<h4 class="text-danger">@ViewBag.errorMessage</h4>
+<p></p>
+<p style="font-size: 24px">
+    @Html.ActionLink("Send the OTP code", "AddPhoneNumber", new { email = ViewBag.email })
+</p>

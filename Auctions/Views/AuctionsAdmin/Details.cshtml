@@ -1,0 +1,131 @@
+﻿@model Auctions.Models.ltRollDescription
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ltRollDescription</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BackgroundColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BackgroundColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FontColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FontColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefreshTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefreshTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuctionDelayTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuctionDelayTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SortPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SortPosition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogoPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogoName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmallLogoName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmallLogoName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RollImagesPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RollImagesPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmsNotification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmsNotification)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
